@@ -8,7 +8,7 @@ Aplikasi web internal Biro Humas dengan dua fitur utama:
 2. **Penugasan** — kabag memberi tugas; PIC mengerjakan, mengumpulkan, lalu melewati alur review dan revisi berjenjang (intern → staff → kabag).
 
 ## 2. Role dan hierarki
-Kabag (admin) > Staff > Intern. Login memakai **username + password** (tanpa email).
+Kabag (admin) > Staff > Intern. Login memakai **username + password** (tanpa email). Nama pengguna disimpan di kolom `name` sebagai identitas tampilan di seluruh UI (pilihan PIC, kartu, tabel, dan laporan PDF).
 
 | Role | Ringkasan hak akses |
 |---|---|
@@ -20,7 +20,7 @@ Halaman khusus intern diletakkan di folder `Staff/` (lihat `AGENT_RULES.md`).
 
 ## 3. Tech stack (final)
 - Laravel versi stabil terbaru yang kompatibel dengan PHP 8.2+, MySQL.
-- Blade + **Livewire 3** (boleh memakai Alpine bawaan Livewire).
+- Blade + **Livewire 4** (`livewire/livewire ^4.4`, boleh memakai Alpine bawaan Livewire).
 - **CSS biasa** di `public/css/` — tanpa Tailwind/Bootstrap/framework CSS, tanpa build step Node untuk CSS.
 - Paket tambahan yang diizinkan: `livewire/livewire`, `laravel/socialite` (hanya untuk Google OAuth saat impor kalender), `barryvdh/laravel-dompdf`, `ifsnop/mysqldump-php`. Paket lain harus minta izin dulu.
 - Zona waktu aplikasi: `Asia/Jakarta` (WIB). Locale: `id`.
@@ -35,9 +35,13 @@ Aplikasi desktop, PWA, notifikasi email/push, WebSocket, upload video (mp4), res
 3. Status tugas diubah manual oleh PIC. Boleh diselesaikan walau lewat deadline; tidak ada penanda terlambat.
 4. Hanya kabag yang menambah kegiatan. Kabag CRUD kegiatan dan tugas.
 5. Akun user tidak bisa dihapus, hanya dinonaktifkan.
-6. Penanda "Baru" dan "Revisi" menempel pada item terkait, bukan pada halaman/menu.
+6. Penanda "Baru" dan "Revisi" menempel pada item terkait, bukan pada halaman/menu. Penanda "Baru" hilang atau kembali default saat item diklik untuk dilihat (klik tanggal membuat titik kembali default/hijau; klik kartu tugas membuat badge Baru hilang).
 7. Pengumpulan: file **jpg/jpeg/png** (maks **50 MB per file**), **link** (mis. Google Drive), atau **teks**. mp4 tidak didukung.
 8. Tabel backup tanpa aksi edit.
+9. Kolom `name` pada tabel `users` digunakan untuk seluruh tampilan identitas di UI (pilihan PIC, penanda PIC, kartu, tabel, PDF), sedangkan `username` hanya sebagai identitas akun/login.
+10. PIC tugas pada popup kegiatan dapat dipilih dari seluruh staff/intern aktif, tidak terbatas pada daftar PIC kegiatan tersebut.
+11. Jika staff penerima dinonaktifkan saat kabag hendak meminta revisi tugas intern, kabag memilih staff pengganti aktif.
+12. Input rentang tanggal pada export PDF di tab Riwayat dibatasi maksimal hari kemarin (sebelum hari ini WIB).
 
 ## 6. Asumsi yang dibuat penyusun dokumen (boleh diubah pemilik proyek)
 - Kabag punya aksi **Terima** pada hasil pengumpulan; setelah diterima tugas masuk Riwayat.

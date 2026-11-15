@@ -41,7 +41,7 @@ Prinsip: dominan netral hangat + hijau army sebagai aksen; hindari warna jenuh. 
 - Skala spasi kelipatan 4px (4, 8, 12, 16, 24, 32).
 
 ## 3. Layout
-- **Sidebar** kiri lebar 260px, latar `--green-900`, teks putih. Berisi logo/nama sistem, menu per role (ikon + label), dan blok user di bawah (username, role, tombol Keluar).
+- **Sidebar** kiri lebar 260px, latar `--green-900`, teks putih. Berisi logo/nama sistem, menu per role (ikon + label), dan blok user di bawah (nama lengkap, username, role, tombol Keluar).
 - **Penanda menu aktif**: satu elemen "pill" absolut di dalam sidebar yang berpindah dengan transisi `transform`/`height` 300ms saat menu berganti. Agar animasi tetap terlihat antar halaman, gunakan Livewire `wire:navigate` dan `@persist('sidebar')`, lalu posisikan ulang pill pada event `livewire:navigated`.
 - **Main content** di kanan sidebar: header halaman (judul, tab, tombol aksi) lalu konten, `max-width` ~1280px.
 - **Responsif**:

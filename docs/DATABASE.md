@@ -6,14 +6,15 @@ Gunakan migration Laravel (satu migration per tabel, urut sesuai dependensi). Ch
 | Kolom | Tipe | Catatan |
 |---|---|---|
 | id | bigint PK | |
-| username | varchar(50) unique | |
+| name | varchar(100) | nama lengkap untuk tampilan identitas di UI (PIC, daftar, PDF) |
+| username | varchar(50) unique | kredensial login |
 | password | varchar | hash bcrypt |
 | role | enum(`kabag`,`staff`,`intern`) | index |
 | is_active | boolean default 1 | |
 | is_trusted | boolean default 0 | Hanya bermakna untuk intern. Staff selalu dianggap trusted lewat accessor, tanpa mengubah kolom. |
 | remember_token | varchar null | |
 
-Seeder: 1 akun kabag (username/password dari `.env` atau default yang wajib diganti), plus akun contoh staff & intern **hanya di environment lokal**.
+Seeder: 1 akun kabag (name/username/password dari `.env` atau default yang wajib diganti), plus akun contoh staff & intern **hanya di environment lokal**.
 
 ## kegiatan
 | Kolom | Tipe | Catatan |

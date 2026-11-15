@@ -5,7 +5,7 @@ Bagian: §1 Auth & Layout · §2 Jadwal Kegiatan · §3 Tugas · §4 Manajemen U
 ---
 
 ## §1 Auth & Layout
-- Halaman login: username + password. Akun `is_active = false` tidak bisa login; jika dinonaktifkan saat sedang login, request berikutnya otomatis logout (middleware).
+- Halaman login: username + password. Kolom `name` (nama lengkap) digunakan sebagai identitas tampilan di seluruh antarmuka (nama PIC, penanda tugas, daftar user, dan PDF), sedangkan `username` hanya sebagai identitas akun/login. Akun `is_active = false` tidak bisa login; jika dinonaktifkan saat sedang login, request berikutnya otomatis logout (middleware).
 - Throttle login (maks 5 percobaan/menit per username+IP).
 - Setelah login, redirect ke Jadwal Kegiatan sesuai role.
 - Layout: sidebar kiri yang sama di semua halaman (isi menu beda per role), main content di kanan. Penanda menu aktif di sidebar **berpindah dengan animasi** saat pindah halaman.
@@ -25,14 +25,14 @@ Header halaman: judul "Jadwal Kegiatan"; di bawahnya tab **Kalender | Kegiatan |
 - **Aturan titik merah & badge "Baru"** (per user, tabel `kegiatan_dilihat`):
   1. Titik merah jika di tanggal itu ada ≥1 kegiatan yang belum pernah dilihat user tersebut.
   2. Kartu kegiatan yang belum pernah dilihat menampilkan badge **Baru**.
-  3. Saat user **mengklik tanggal**, semua kegiatan di tanggal itu ditandai dilihat dan titik langsung berubah ke warna default. Badge Baru pada kartu yang sedang tampil tetap terlihat selama tanggal itu terbuka, lalu hilang segera saat kartunya diklik dan tidak muncul lagi di kunjungan berikutnya.
+  3. Saat user **mengklik tanggal**, titik tanggal langsung berubah kembali ke warna default (hijau) dan semua kegiatan di tanggal itu ditandai dilihat di database. Pada kartu kegiatan maupun tugas, badge **Baru** langsung hilang saat kartu diklik untuk dilihat.
   4. Jika kegiatan baru ditambahkan di tanggal yang sudah pernah dibuka, titik kembali merah dan badge Baru hanya muncul di kartu kegiatan baru itu.
   5. Pada tab Kegiatan, badge Baru juga hilang saat kartu diklik (menandai kartu itu dilihat).
 - **Kartu kegiatan**: persegi panjang berisi judul, waktu, tempat. Seluruh kartu bisa diklik → popup rincian.
 
 ### 2.2 Popup rincian kegiatan
 Menampilkan judul, tanggal, waktu, tempat, deskripsi, daftar PIC, dan daftar tugas terkait.
-- **Kabag**: tombol Edit & Hapus; pemilihan PIC multi-pilih dengan tombol **Pilih Semua** (hanya staff & intern aktif, tanpa kabag); tombol **Tambah Tugas** (lihat §2.5).
+- **Kabag**: tombol Edit & Hapus; pemilihan PIC multi-pilih dengan tombol **Pilih Semua** (menampilkan `name` staff & intern aktif, tanpa kabag); tombol **Tambah Tugas** (lihat §2.5).
 - **Staff/Intern**: hanya lihat.
 
 ### 2.3 Tab Kegiatan (daftar bulanan)
@@ -44,13 +44,13 @@ Menampilkan judul, tanggal, waktu, tempat, deskripsi, daftar PIC, dan daftar tug
 - Daftar kegiatan dengan tanggal **sebelum hari ini** (patokan WIB), terbaru di atas. Kartu tetap bisa diklik untuk melihat rincian.
 - **Export PDF**: klik tombol → popup dengan dua pilihan: **Berdasarkan bulan** atau **Berdasarkan rentang tanggal**.
   - Berdasarkan bulan: pilih bulan dan tahun.
-  - Berdasarkan rentang tanggal: area pilih bulan berubah (animasi) menjadi dua input tanggal (dari, sampai).
-- PDF berupa tabel: No, Judul Kegiatan, Tanggal, Tempat, PIC (nama-nama dipisah koma). Kop: "Rekap Kegiatan Biro Humas", periode, tanggal cetak. Jika tidak ada data, tampilkan pesan di popup dan jangan buat PDF kosong.
+  - Berdasarkan rentang tanggal: area pilih bulan berubah (animasi) menjadi dua input tanggal (dari, sampai). Input tanggal 'sampai' dibatasi maksimal hari kemarin (sebelum hari ini WIB).
+- PDF berupa tabel: No, Judul Kegiatan, Tanggal, Tempat, PIC (nama lengkap dipisah koma). Kop: "Rekap Kegiatan Biro Humas", periode, tanggal cetak. Jika tidak ada data, tampilkan pesan di popup dan jangan buat PDF kosong.
 
 ### 2.5 Form Tambah/Edit Kegiatan (kabag)
-Popup berisi: judul*, tanggal*, waktu mulai (kosong = seharian), waktu selesai (opsional), tempat*, deskripsi, PIC (multi, Pilih Semua).
+Popup berisi: judul*, tanggal*, waktu mulai (kosong = seharian), waktu selesai (opsional), tempat*, deskripsi, PIC (multi, Pilih Semua dari nama staff & intern aktif).
 - Di bagian atas form (hanya saat tambah): tombol **Tambah dari Google Calendar** (lihat §7).
-- Di bagian bawah form: tombol **Tambah Tugas**. Saat diklik, popup **mengembang ke bawah** dan menampilkan form tugas (komponen yang sama dengan halaman Tugas, §3.2) dengan kegiatan terkait terisi otomatis. Boleh menambah lebih dari satu tugas; semuanya disimpan bersama kegiatan dalam satu transaksi.
+- Di bagian bawah form: tombol **Tambah Tugas**. Saat diklik, popup **mengembang ke bawah** dan menampilkan form tugas (komponen yang sama dengan halaman Tugas, §3.2) dengan kegiatan terkait terisi otomatis. PIC tugas dapat dipilih dari seluruh staff/intern aktif (tidak terbatas pada daftar PIC kegiatan tersebut). Boleh menambah lebih dari satu tugas; semuanya disimpan bersama kegiatan dalam satu transaksi.
 - Tombol Tambah Tugas juga tersedia di popup rincian (mode kabag) untuk kegiatan yang sudah ada.
 - Menghapus kegiatan **tidak** menghapus tugas terkait (`kegiatan_id` menjadi kosong).
 
@@ -68,7 +68,7 @@ Popup berisi: judul*, tanggal*, waktu mulai (kosong = seharian), waktu selesai (
 ### 3.2 Kabag — halaman Tugas
 Tab: **Daftar Tugas | Selesai | Riwayat**; tombol **Tambah Tugas** di sebelah tab.
 - **Form tugas**: judul*, deadline*, prioritas* (rendah/sedang/tinggi), PIC* (satu orang, staff/intern aktif, tanpa kabag), kegiatan terkait (opsional; "Tidak terkait kegiatan" sebagai default).
-- **Daftar Tugas**: tugas dengan tahap `belum_dikumpulkan`, `menunggu_staff`, `revisi`. Kartu persegi panjang: judul, deadline, PIC, badge status (belum/sedang/selesai), badge kegiatan terkait (jika ada), badge tambahan: "Di staff: <username>" bila `menunggu_staff`, "Revisi" bila `revisi`. Klik kartu → popup rincian dengan Edit/Hapus.
+- **Daftar Tugas**: tugas dengan tahap `belum_dikumpulkan`, `menunggu_staff`, `revisi`. Kartu persegi panjang: judul, deadline, PIC (nama lengkap), badge status (belum/sedang/selesai), badge kegiatan terkait (jika ada), badge tambahan: "Di staff: <nama staff>" bila `menunggu_staff`, "Revisi" bila `revisi`. Klik kartu → popup rincian dengan Edit/Hapus.
 - **Selesai**: tugas dengan tahap `menunggu_kabag` (sudah sampai ke kabag). Begitu tugas sampai ke kabag, otomatis **hilang dari Daftar Tugas dan muncul di sini**. Kartu menampilkan petunjuk ringan (ikon + teks kecil "Lihat pengumpulan"), kursor pointer saat hover, dan badge Baru sampai dibuka. Klik → popup hasil pengumpulan (§3.5).
 - **Riwayat**: tugas dengan tahap `diterima`, bisa dibuka (read-only).
 - Aturan edit: PIC hanya bisa diganti jika tahap `belum_dikumpulkan`. Menghapus tugas menghapus pengumpulan, catatan revisi, dan file fisiknya (dengan konfirmasi).
@@ -99,9 +99,9 @@ Hasil: tugas diteruskan sesuai tujuan (lihat tabel transisi §3.7).
 - **View** membuka penampil gambar layar penuh dengan tombol/keyboard kiri-kanan untuk pindah ke gambar sebelumnya/berikutnya tanpa menutup penampil.
 - Jika file > 1, muncul tombol **Download Semua (ZIP)** di bawah popup.
 - Link: tombol buka di tab baru (`rel="noopener noreferrer"`). Teks: tampil lengkap.
-- Catatan kecil **"Diedit oleh <username, username>"** jika ada log edit oleh staff.
+- Catatan kecil **"Diedit oleh <nama staff, nama staff>"** jika ada log edit oleh staff.
 - Kabag **tidak bisa** menambah/menghapus file. Jika jenis teks, kabag bisa **mengedit langsung di tempat**.
-- Tombol **Revisi** → isi popup berganti menjadi form catatan revisi (daftar poin, bisa tambah/hapus baris) → **Kirim**. Revisi dikirim ke staff yang meneruskan (`staff_penerima_id`); jika pengumpulan langsung dari intern *trusted* maka ke intern; jika PIC adalah staff maka ke staff itu.
+- Tombol **Revisi** → isi popup berganti menjadi form catatan revisi (daftar poin, bisa tambah/hapus baris) → **Kirim**. Revisi dikirim ke staff yang meneruskan (`staff_penerima_id`); bila staff tersebut dinonaktifkan, kabag memilih staff pengganti aktif; jika pengumpulan langsung dari intern *trusted* maka ke intern; jika PIC adalah staff maka ke staff itu.
 - Tombol **Terima** → tugas masuk Riwayat.
 - File diakses lewat controller yang memeriksa otorisasi (bukan URL publik).
 
@@ -119,7 +119,7 @@ Berisi tugas intern dengan `pemegang = staff ini` dan tahap `menunggu_staff`, di
 | Kirim ke Kabag | staff penerima | `menunggu_staff` atau `revisi` (pemegang staff) | `menunggu_kabag` |
 | Revisi | staff penerima | `menunggu_staff` atau `revisi` (pemegang staff) | `revisi` (pemegang = intern PIC) |
 | Kumpulkan Kembali | intern PIC | `revisi` | `menunggu_staff` (staff penerima sebelumnya) atau `menunggu_kabag` jika sebelumnya langsung ke kabag; bila staff penerima nonaktif, intern memilih ulang |
-| Revisi | kabag | `menunggu_kabag` | `revisi` (pemegang = `staff_penerima_id` ?? PIC) |
+| Revisi | kabag | `menunggu_kabag` | `revisi` (pemegang = `staff_penerima_id` ?? PIC; bila staff penerima nonaktif, kabag memilih staff pengganti aktif) |
 | Kumpulkan Kembali | staff PIC | `revisi` | `menunggu_kabag` |
 | Terima | kabag | `menunggu_kabag` | `diterima` (pemegang kosong) |
 
@@ -129,13 +129,13 @@ Semua transisi diimplementasikan di satu service (`TugasAlurService`) dan dibung
 ---
 
 ## §4 Manajemen User (Kabag)
-1. **Form akun kabag** di bagian paling atas (lebih besar dari form biasa): username, password, tombol Simpan. Password ditampilkan sebagai titik-titik (placeholder, karena password tersimpan ter-hash dan tidak bisa ditampilkan); klik form untuk mengganti; tombol mata menampilkan/menyembunyikan teks yang sedang diketik. Perlu password lama saat mengganti password.
-2. Tombol **Tambah User** → popup: username, password, role (staff/intern).
-3. **Tabel user**: kolom Username | Role | Status | Trusted | Aksi (tombol edit).
-   - Pengelompokan: semua **staff** di baris atas, **garis pembatas** (masih di tabel yang sama), lalu semua **intern** di bawah. Urut alfabet di tiap kelompok.
+1. **Form akun kabag** di bagian paling atas (lebih besar dari form biasa): nama lengkap (`name`), username, password, tombol Simpan. Password ditampilkan sebagai titik-titik (placeholder, karena password tersimpan ter-hash dan tidak bisa ditampilkan); klik form untuk mengganti; tombol mata menampilkan/menyembunyikan teks yang sedang diketik. Perlu password lama saat mengganti password.
+2. Tombol **Tambah User** → popup: nama lengkap (`name`), username, password, role (staff/intern).
+3. **Tabel user**: kolom Nama | Username | Role | Status | Trusted | Aksi (tombol edit).
+   - Pengelompokan: semua **staff** di baris atas, **garis pembatas** (masih di tabel yang sama), lalu semua **intern** di bawah. Urut alfabet di tiap kelompok berdasarkan nama.
    - **Status**: toggle switch aktif/nonaktif. Nonaktif = tidak bisa login. Kabag tidak bisa menonaktifkan akunnya sendiri.
    - **Trusted**: checkbox. Untuk **staff**: tercentang, warna abu agak buram, tidak bisa diubah. Untuk **intern**: solid dan bisa dicentang/dilepas (tersimpan otomatis dengan umpan balik toast).
-   - **Aksi**: Edit → popup dengan username, password (kosong = tidak diubah), role (hanya staff/intern).
+   - **Aksi**: Edit → popup dengan nama lengkap (`name`), username, password (kosong = tidak diubah), role (hanya staff/intern).
 4. Tidak ada tombol hapus akun. Username unik. Akun nonaktif tidak muncul di pilihan PIC dan daftar tujuan pengumpulan, tetapi data historisnya tetap utuh.
 
 ---
@@ -149,7 +149,7 @@ Semua transisi diimplementasikan di satu service (`TugasAlurService`) dan dibung
 ---
 
 ## §6 Manajemen Akun (Staff & Intern)
-Halaman **Akun Saya**: ganti username dan/atau password sendiri tanpa persetujuan kabag. Password lama wajib saat mengganti password. Username unik.
+Halaman **Akun Saya**: ganti nama lengkap (`name`), username dan/atau password sendiri tanpa persetujuan kabag. Password lama wajib saat mengganti password. Username unik.
 
 ---
 
