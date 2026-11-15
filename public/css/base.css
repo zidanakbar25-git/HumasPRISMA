@@ -1,0 +1,102 @@
+/* ==========================================================================
+   BASE.CSS — Design Tokens, Reset, & Tipografi (Tema Hijau Army)
+   ========================================================================== */
+
+:root {
+  /* Hijau Army */
+  --green-900: #2F3A1A;
+  --green-800: #3D4A22;
+  --green-700: #4B5D2A;   /* Primer */
+  --green-600: #5E7335;
+  --green-500: #758C47;
+  --green-200: #CFD9B8;
+  --green-100: #E8EDDC;
+  --green-50:  #F3F6EC;
+
+  /* Netral */
+  --bg: #F6F7F2;
+  --surface: #FFFFFF;
+  --text: #1E2616;
+  --muted: #6B7360;
+  --border: #DDE2D0;
+
+  /* Semantik */
+  --danger: #B3382C;
+  --danger-bg: #FBEAE8;
+  --warning: #A8690F;
+  --warning-bg: #FBF1DD;
+  --success: #3F7D3A;
+  --success-bg: #E6F3E4;
+  --info: #3B6EA5;
+  --info-bg: #E6EEF7;
+
+  /* Bentuk & Gerak */
+  --radius-sm: 8px;
+  --radius: 12px;
+  --shadow-sm: 0 1px 2px rgba(30, 38, 22, 0.06);
+  --shadow-md: 0 6px 18px rgba(30, 38, 22, 0.10);
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --t-fast: 150ms;
+  --t: 250ms;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+h1 { font-size: 1.5rem; }     /* 24px */
+h2 { font-size: 1.125rem; }   /* 18px */
+h3 { font-size: 1rem; }       /* 16px */
+
+p, span, label, input, button, textarea, select {
+  font-size: 0.9375rem;       /* 15px */
+}
+
+small, .text-small {
+  font-size: 0.8125rem;       /* 13px */
+}
+
+a {
+  color: var(--green-700);
+  text-decoration: none;
+  transition: color var(--t-fast) var(--ease);
+}
+
+a:hover {
+  color: var(--green-800);
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
