@@ -1,110 +1,121 @@
-<div>
-    <div class="page-header" style="display: flex; justify-content: space-between; align-items: center;">
+<div class="user-page">
+    <div class="header-page" style="display: flex; justify-content: space-between; align-items: center;">
         <h1 class="page-title">Manajemen User</h1>
-        <button type="button" class="btn btn-primary" wire:click="openCreateModal">
-            <x-icon name="user" :size="18" />
-            <span>Tambah User</span>
-        </button>
     </div>
 
-    {{-- 1. FORM AKUN KABAG (Di Bagian Paling Atas, Lebih Besar Dari Form Biasa) --}}
-    <div class="card" style="margin-bottom: 32px; border-left: 4px solid var(--green-700); padding: 28px;">
-        <div style="margin-bottom: 20px;">
-            <h2 style="font-size: 1.125rem; font-weight: 700; color: var(--green-900);">Pengaturan Akun Kepala Bagian</h2>
-            <p style="font-size: 0.875rem; color: var(--muted);">Perbarui nama, username, atau ganti password akun utama Anda.</p>
-        </div>
-
+        {{-- 1. AKUN KABAG  --}}
+    <div
+        class="card akun-card"
+        x-data="{ showPass: @js($errors->has('kabag_current_password') || $errors->has('kabag_new_password')), showText: false }">
         <form wire:submit.prevent="simpanAkunKabag">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;">
-                <div class="form-group" style="margin-bottom: 0;">
+            <div class="akun-head">
+                <div class="akun-id">
+                    <span class="akun-avatar" aria-hidden="true"><x-icon name="user" :size="18" /></span>
+                    <div>
+                        <h2 class="akun-title">Akun Kepala Bagian</h2>
+                        <p class="akun-sub">Nama, username, dan password akun utama.</p>
+                    </div>
+                </div>
+
+                <button
+                    type="button"
+                    class="akun-link"
+                    x-on:click="
+                        showPass = !showPass;
+                        if (!showPass) { $wire.kabag_current_password = ''; $wire.kabag_new_password = ''; showText = false; }
+                    ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <span x-text="showPass ? 'Batal ganti password' : 'Ganti password'">Ganti password</span>
+                </button>
+            </div>
+
+            <div class="akun-grid">
+                <div class="form-group">
                     <label for="kabag_name" class="form-label">Nama Lengkap</label>
-                    <input 
-                        type="text" 
-                        id="kabag_name" 
-                        wire:model="kabag_name" 
-                        class="form-control {{ $errors->has('kabag_name') ? 'is-invalid' : '' }}" 
-                        placeholder="Nama Kepala Bagian"
-                    >
+                    <input
+                        type="text"
+                        id="kabag_name"
+                        wire:model="kabag_name"
+                        class="form-control {{ $errors->has('kabag_name') ? 'is-invalid' : '' }}"
+                        placeholder="Nama Kepala Bagian">
                     @error('kabag_name')
                         <span class="form-error">{{ $message }}</span>
                     @enderror
                 </div>
 
-                <div class="form-group" style="margin-bottom: 0;">
+                <div class="form-group">
                     <label for="kabag_username" class="form-label">Username</label>
-                    <input 
-                        type="text" 
-                        id="kabag_username" 
-                        wire:model="kabag_username" 
-                        class="form-control {{ $errors->has('kabag_username') ? 'is-invalid' : '' }}" 
-                        placeholder="Username login"
-                    >
+                    <input
+                        type="text"
+                        id="kabag_username"
+                        wire:model="kabag_username"
+                        class="form-control {{ $errors->has('kabag_username') ? 'is-invalid' : '' }}"
+                        placeholder="Username login">
                     @error('kabag_username')
                         <span class="form-error">{{ $message }}</span>
                     @enderror
                 </div>
-            </div>
 
-            {{-- Kolom Ganti Password Kabag --}}
-            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px dashed var(--border);">
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;">
-                    <div class="form-group" style="margin-bottom: 0;">
-                        <label for="kabag_current_password" class="form-label">Password Lama</label>
-                        <input 
-                            type="password" 
-                            id="kabag_current_password" 
-                            wire:model="kabag_current_password" 
-                            class="form-control {{ $errors->has('kabag_current_password') ? 'is-invalid' : '' }}" 
-                            placeholder="Wajib jika mengganti password"
-                        >
-                        @error('kabag_current_password')
-                            <span class="form-error">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group" style="margin-bottom: 0;">
-                        <label for="kabag_new_password" class="form-label">Password Baru</label>
-                        <div style="position: relative;">
-                            <input 
-                                type="{{ $show_kabag_password ? 'text' : 'password' }}" 
-                                id="kabag_new_password" 
-                                wire:model="kabag_new_password" 
-                                class="form-control {{ $errors->has('kabag_new_password') ? 'is-invalid' : '' }}" 
-                                placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull; (Klik untuk mengganti)"
-                            >
-                            <button 
-                                type="button" 
-                                wire:click="$toggle('show_kabag_password')"
-                                style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--muted); cursor: pointer; padding: 4px;"
-                                title="{{ $show_kabag_password ? 'Sembunyikan password' : 'Lihat password' }}"
-                            >
-                                @if($show_kabag_password)
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="m9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/>
-                                    </svg>
-                                @else
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>
-                                    </svg>
-                                @endif
-                            </button>
-                        </div>
-                        @error('kabag_new_password')
-                            <span class="form-error">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-            </div>
-
-            <div style="display: flex; justify-content: flex-end; margin-top: 24px;">
-                <button type="submit" class="btn btn-primary" wire:loading.attr="disabled">
-                    <span wire:loading.remove>Simpan Akun Kabag</span>
+                <button type="submit" class="btn btn-primary akun-save" wire:loading.attr="disabled">
+                    <span wire:loading.remove>Simpan</span>
                     <span wire:loading>Menyimpan...</span>
                 </button>
+            </div>
+
+            {{-- Password (muncul hanya saat "Ganti password" diklik) --}}
+            <div class="akun-pass" x-show="showPass" x-cloak x-transition.opacity.duration.200ms>
+                <div class="form-group">
+                    <label for="kabag_current_password" class="form-label">Password Lama</label>
+                    <input
+                        type="password"
+                        id="kabag_current_password"
+                        wire:model="kabag_current_password"
+                        class="form-control {{ $errors->has('kabag_current_password') ? 'is-invalid' : '' }}"
+                        placeholder="Wajib diisi untuk mengganti password"
+                        autocomplete="current-password">
+                    @error('kabag_current_password')
+                        <span class="form-error">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="kabag_new_password" class="form-label">Password Baru</label>
+                    <div class="akun-pw-wrap">
+                        <input
+                            :type="showText ? 'text' : 'password'"
+                            id="kabag_new_password"
+                            wire:model="kabag_new_password"
+                            class="form-control {{ $errors->has('kabag_new_password') ? 'is-invalid' : '' }}"
+                            placeholder="Minimal 6 karakter"
+                            autocomplete="new-password">
+                        <button
+                            type="button"
+                            class="akun-eye"
+                            x-on:click="showText = !showText"
+                            :aria-label="showText ? 'Sembunyikan password' : 'Lihat password'">
+                            <svg x-show="!showText" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                            <svg x-show="showText" x-cloak xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg>
+                        </button>
+                    </div>
+                    @error('kabag_new_password')
+                        <span class="form-error">{{ $message }}</span>
+                    @enderror
+                </div>
             </div>
         </form>
     </div>
 
+        <div class="user-toolbar">
+        <div class="user-toolbar-info">
+            <h2 class="user-toolbar-title">Daftar User</h2>
+            <span class="user-toolbar-count">{{ $staffUsers->count() + $internUsers->count() }} akun</span>
+        </div>
+        <button type="button" class="btn btn-primary" wire:click="openCreateModal">
+            <x-icon name="plus" :size="16" />
+            <span>Tambah User</span>
+        </button>
+    </div>
+    
     {{-- 2. TABEL DAFTAR PENGGUNA --}}
     <div class="table-container">
         <div class="table-responsive">

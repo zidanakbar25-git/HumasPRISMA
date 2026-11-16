@@ -308,3 +308,31 @@
     font-size: 1.25rem;
   }
 }
+
+/* ===== PERBAIKAN POSISI PILL SIDEBAR (tambahan, taruh paling bawah) ===== */
+.sidebar-nav {
+    position: relative;
+}
+
+.sidebar-active-pill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    z-index: 0;
+    transition: transform 300ms var(--ease),
+                width 300ms var(--ease),
+                height 300ms var(--ease),
+                opacity 200ms var(--ease);
+}
+
+.sidebar-active-pill.no-anim {
+    transition: none;
+}
+
+.sidebar-link {
+    position: relative;
+    z-index: 1;
+}

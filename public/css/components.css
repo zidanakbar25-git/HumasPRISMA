@@ -679,3 +679,204 @@ body:has(.modal-backdrop.open) {
         max-height: calc(100dvh - 16px);
     }
 }
+
+
+/* ===== MANAJEMEN USER: kartu akun kabag ringkas ===== */
+[x-cloak] { display: none !important; }
+
+/* Jarak judul halaman -> kartu akun kabag */
+.user-page .page-header.user-page-header {
+    margin-bottom: 24px;
+}
+
+/* Jarak kartu akun kabag -> bilah "Daftar User" */
+.user-page .akun-card {
+    margin-bottom: 36px;
+}
+
+.user-page .akun-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.user-page .akun-id {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.user-page .akun-avatar {
+    flex: 0 0 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--green-100);
+    color: var(--green-800);
+}
+
+.user-page .akun-title {
+    margin: 0;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.user-page .akun-sub {
+    margin: 1px 0 0;
+    font-size: 0.75rem;
+    color: var(--muted);
+}
+
+.user-page .akun-link {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 32px;
+    padding: 0 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--green-800);
+    font: inherit;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+}
+
+.user-page .akun-link:hover {
+    background: var(--green-50);
+    border-color: var(--green-200);
+}
+
+.user-page .akun-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+    gap: 12px 14px;
+    align-items: end;
+}
+
+.user-page .akun-pass {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 14px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--border);
+}
+
+.user-page .akun-grid .form-group,
+.user-page .akun-pass .form-group { margin: 0; }
+
+.user-page .akun-grid .form-label,
+.user-page .akun-pass .form-label {
+    margin-bottom: 5px;
+    font-size: 0.75rem;
+}
+
+.user-page .akun-grid .form-control,
+.user-page .akun-pass .form-control {
+    height: 38px;
+    font-size: 0.875rem;
+}
+
+.user-page .akun-save {
+    height: 38px;
+    padding: 0 20px;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.user-page .akun-pw-wrap { position: relative; }
+.user-page .akun-pw-wrap .form-control { padding-right: 42px; }
+
+.user-page .akun-eye {
+    position: absolute;
+    top: 50%;
+    right: 6px;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color var(--t-fast) var(--ease), background-color var(--t-fast) var(--ease);
+}
+
+.user-page .akun-eye:hover {
+    background: var(--green-50);
+    color: var(--text);
+}
+
+@media (max-width: 767px) {
+    .user-page .akun-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .user-page .akun-save { grid-column: 1 / -1; width: 100%; }
+}
+
+@media (max-width: 479px) {
+    .user-page .akun-grid,
+    .user-page .akun-pass { grid-template-columns: minmax(0, 1fr); }
+    .user-page .akun-head { align-items: flex-start; flex-wrap: wrap; }
+    .user-page .akun-sub { display: none; }
+}
+
+.user-page .user-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.user-page .user-toolbar-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.user-page .user-toolbar-title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.user-page .user-toolbar-count {
+    padding: 2px 9px;
+    border-radius: 999px;
+    background: var(--green-100);
+    color: var(--green-900);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.user-page .user-toolbar .btn {
+    height: 38px;
+    padding: 0 16px;
+    gap: 8px;
+    font-size: 0.8125rem;
+    font-weight: 700;
+}
+
+@media (max-width: 479px) {
+    .user-page .page-header.user-page-header { margin-bottom: 18px; }
+    .user-page .akun-card { margin-bottom: 28px; }
+    .user-page .user-toolbar .btn { padding: 0 12px; }
+}

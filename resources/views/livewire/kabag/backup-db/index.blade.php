@@ -13,10 +13,10 @@
             <div style="max-width: 720px;">
                 <h3 style="font-size: 1.0625rem; font-weight: 700; color: var(--green-900); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg>
-                    <span>Salinan Cadangan Mandiri (SQL Dump)</span>
+                    <span>Salinan Cadangan Database</span>
                 </h3>
                 <p style="font-size: 0.875rem; color: var(--text); line-height: 1.6; margin: 0;">
-                    Klik tombol di samping untuk menghasilkan dump <strong>struktur tabel dan seluruh data</strong> aplikasi saat ini ke dalam berkas <code>.sql</code>. File disimpan di disk privat berkeamanan tinggi (tidak dapat diakses publik) dan hanya dapat diunduh oleh akun Kepala Bagian.
+                    Klik tombol untuk Lakukan pencadangan berkas database secara berkala untuk menjaga integritas dan keamanan data instansi. Berkas disimpan dalam format .sql terenkripsi. <br>
                 </p>
             </div>
 
@@ -30,12 +30,9 @@
                 >
                     <span wire:loading.remove style="display: flex; align-items: center; gap: 8px;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-                        <span>Backup Database Sekarang</span>
+                        <span>Backup Database</span>
                     </span>
-                    <span wire:loading style="display: flex; align-items: center; gap: 8px;">
-                        <svg class="spinner" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>
-                        <span>Membuat Salinan Database...</span>
-                    </span>
+                    
                 </button>
             </div>
         </div>

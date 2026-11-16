@@ -95,36 +95,43 @@
 
 <div id="sidebar-backdrop" class="sidebar-backdrop" onclick="toggleSidebar(false)"></div>
 
-<script>
-    function updateActivePill() {
+<script data-navigate-once>
+    function updateActivePill(instant = false) {
         const nav = document.querySelector('.sidebar-nav');
         const pill = document.querySelector('.sidebar-active-pill');
         if (!nav || !pill) return;
 
         const currentPath = window.location.pathname;
-        const links = nav.querySelectorAll('.sidebar-link');
         let activeLink = null;
 
-        links.forEach(link => {
+        nav.querySelectorAll('.sidebar-link').forEach(link => {
             const linkUrl = new URL(link.href, window.location.origin);
-            if (currentPath === linkUrl.pathname || (linkUrl.pathname !== '/' && currentPath.startsWith(linkUrl.pathname))) {
-                activeLink = link;
-                link.classList.add('active');
-            } else {
-                link.classList.remove('active');
-            }
+            const isActive = currentPath === linkUrl.pathname ||
+                (linkUrl.pathname !== '/' && currentPath.startsWith(linkUrl.pathname));
+            link.classList.toggle('active', isActive);
+            if (isActive) activeLink = link;
         });
 
-        if (activeLink) {
-            const navRect = nav.getBoundingClientRect();
-            const linkRect = activeLink.getBoundingClientRect();
-            const topOffset = linkRect.top - navRect.top + nav.scrollTop;
-            
-            pill.style.opacity = '1';
-            pill.style.height = `${linkRect.height}px`;
-            pill.style.transform = `translateY(${topOffset}px)`;
-        } else {
+        if (!activeLink) {
             pill.style.opacity = '0';
+            return;
+        }
+
+        const navRect = nav.getBoundingClientRect();
+        const linkRect = activeLink.getBoundingClientRect();
+        const x = linkRect.left - navRect.left - nav.clientLeft + nav.scrollLeft;
+        const y = linkRect.top - navRect.top - nav.clientTop + nav.scrollTop;
+
+        if (instant) pill.classList.add('no-anim');
+
+        pill.style.opacity = '1';
+        pill.style.width = `${linkRect.width}px`;
+        pill.style.height = `${linkRect.height}px`;
+        pill.style.transform = `translate(${x}px, ${y}px)`;
+
+        if (instant) {
+            void pill.offsetHeight;
+            pill.classList.remove('no-anim');
         }
     }
 
@@ -134,13 +141,8 @@
         if (!sidebar || !backdrop) return;
 
         if (typeof open === 'boolean') {
-            if (open) {
-                sidebar.classList.add('open');
-                backdrop.classList.add('active');
-            } else {
-                sidebar.classList.remove('open');
-                backdrop.classList.remove('active');
-            }
+            sidebar.classList.toggle('open', open);
+            backdrop.classList.toggle('active', open);
         } else {
             sidebar.classList.toggle('open');
             backdrop.classList.toggle('active');
@@ -148,23 +150,23 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        updateActivePill();
-        // Tutup drawer mobile saat link diklik
+        updateActivePill(true);
         document.querySelectorAll('.sidebar-link').forEach(link => {
             link.addEventListener('click', () => {
-                if (window.innerWidth < 1024) {
-                    toggleSidebar(false);
-                }
+                if (window.innerWidth < 1024) toggleSidebar(false);
             });
         });
     });
 
+    window.addEventListener('load', () => updateActivePill(true));
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => updateActivePill(true));
+    }
+
     document.addEventListener('livewire:navigated', () => {
         updateActivePill();
-        if (window.innerWidth < 1024) {
-            toggleSidebar(false);
-        }
+        if (window.innerWidth < 1024) toggleSidebar(false);
     });
 
-    window.addEventListener('resize', updateActivePill);
+    window.addEventListener('resize', () => updateActivePill(true));
 </script>
