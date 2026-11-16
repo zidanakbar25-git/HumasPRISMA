@@ -540,856 +540,1286 @@
         }
 
         /* ===== POPUP RINCIAN KEGIATAN ===== */
-.jadwal-page .detail-modal {
-    max-width: 600px;
-    width: 100%;
-    padding: 0;
-    border-radius: 16px;
-    overflow: hidden;
-}
-
-.jadwal-page .detail-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 22px 24px 16px;
-    border-bottom: 1px solid var(--border);
-    background: var(--surface);
-}
-
-.jadwal-page .detail-heading { min-width: 0; }
-
-.jadwal-page .detail-title {
-    margin: 0;
-    font-size: 1.25rem;
-    font-weight: 700;
-    line-height: 1.3;
-    letter-spacing: -0.02em;
-    color: var(--text);
-    overflow-wrap: anywhere;
-}
-
-.jadwal-page .detail-subtitle {
-    margin: 4px 0 0;
-    font-size: 0.8125rem;
-    color: var(--muted);
-}
-
-.jadwal-page .detail-close {
-    flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 34px;
-    height: 34px;
-    padding: 0;
-    border: 1px solid var(--border);
-    border-radius: 50%;
-    background: var(--surface);
-    color: var(--text);
-    cursor: pointer;
-    transition: background-color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
-}
-
-.jadwal-page .detail-close:hover {
-    background: var(--green-50);
-    border-color: var(--green-200);
-}
-
-.jadwal-page .detail-body {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 18px 24px 22px;
-    
-}
-
-.jadwal-page .detail-info {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 10px 20px;
-    padding: 14px 16px;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    background: var(--green-50);
-}
-
-.jadwal-page .detail-info-item {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    min-width: 0;
-    font-size: 0.875rem;
-    color: var(--text);
-}
-
-.jadwal-page .detail-info-item svg { flex: 0 0 16px; color: var(--muted); }
-.jadwal-page .detail-info-item span { overflow-wrap: anywhere; }
-.jadwal-page .detail-info-place { grid-column: 1 / -1; }
-
-.jadwal-page .detail-section-title {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 0 0 10px;
-    font-size: 0.8125rem;
-    font-weight: 700;
-    color: var(--text);
-}
-
-.jadwal-page .detail-section-title svg { color: var(--muted); }
-
-.jadwal-page .detail-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.jadwal-page .detail-chip {
-    display: inline-flex;
-    align-items: center;
-    padding: 5px 12px;
-    border: 1px solid var(--green-200);
-    border-radius: 999px;
-    background: var(--green-100);
-    color: var(--green-900);
-    font-size: 0.75rem;
-    font-weight: 500;
-    line-height: 1.4;
-}
-
-.jadwal-page .detail-desc {
-    padding: 14px 16px;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    background: var(--surface);
-    color: var(--text);
-    font-size: 0.875rem;
-    line-height: 1.7;
-    white-space: pre-wrap;
-    overflow-wrap: anywhere;
-}
-
-.jadwal-page .detail-empty {
-    color: var(--muted);
-    font-size: 0.8125rem;
-    font-style: italic;
-}
-
-.jadwal-page .detail-tugas-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-.jadwal-page .detail-tugas-head .detail-section-title { margin: 0; }
-.jadwal-page .detail-tugas-add { height: 30px; padding: 0 10px; font-size: 0.75rem; gap: 5px; }
-
-.jadwal-page .detail-tugas-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.jadwal-page .detail-tugas-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 10px 12px;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    background: var(--surface);
-}
-
-.jadwal-page .detail-tugas-main { min-width: 0; }
-
-.jadwal-page .detail-tugas-title {
-    font-size: 0.8125rem;
-    font-weight: 600;
-    color: var(--text);
-    overflow-wrap: anywhere;
-}
-
-.jadwal-page .detail-tugas-meta {
-    margin-top: 2px;
-    font-size: 0.6875rem;
-    color: var(--muted);
-}
-
-.jadwal-page .detail-tugas-badges {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 6px;
-    flex-shrink: 0;
-}
-
-.jadwal-page .detail-tugas-badges .badge { font-size: 0.6875rem; }
-
-.jadwal-page .detail-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 14px 24px;
-    border-top: 1px solid var(--border);
-    background: var(--green-50);
-}
-
-.jadwal-page .detail-footer-actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-left: auto;
-}
-
-.jadwal-page .detail-footer .btn {
-    height: 36px;
-    padding: 0 16px;
-    font-size: 0.8125rem;
-    font-weight: 600;
-    gap: 7px;
-}
-
-.jadwal-page .detail-edit { border-color: var(--green-900); }
-
-.jadwal-page .detail-delete {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    height: 36px;
-    padding: 0 10px;
-    border: 0;
-    border-radius: 8px;
-    background: transparent;
-    color: var(--danger);
-    font: inherit;
-    font-size: 0.8125rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color var(--t-fast) var(--ease);
-}
-
-.jadwal-page .detail-delete:hover { background: var(--danger-bg); }
-
-@media (max-width: 479px) {
-    .jadwal-page .detail-header { padding: 18px 16px 14px; }
-    .jadwal-page .detail-body { padding: 16px; }
-    .jadwal-page .detail-info { grid-template-columns: minmax(0, 1fr); }
-    .jadwal-page .detail-footer { flex-wrap: wrap; padding: 12px 16px; }
-    .jadwal-page .detail-tugas-item { flex-direction: column; align-items: flex-start; }
-    .jadwal-page .detail-tugas-badges { justify-content: flex-start; }
-}
-
-/* ===== POPUP PILIH EVENT GOOGLE CALENDAR ===== */
-.jadwal-page .gcal-modal {
-    max-width: 560px;
-    width: 100%;
-    padding: 0;
-    border-radius: 16px;
-}
-
-.jadwal-page .gcal-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 14px;
-    padding: 18px 22px;
-    border-bottom: 1px solid var(--border);
-}
-
-.jadwal-page .gcal-header-main {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    min-width: 0;
-}
-
-.jadwal-page .gcal-header-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex: 0 0 38px;
-    width: 38px;
-    height: 38px;
-    border: 1px solid var(--green-200);
-    border-radius: 10px;
-    background: var(--green-100);
-    color: var(--green-700);
-}
-
-.jadwal-page .gcal-title {
-    margin: 0;
-    font-size: 1rem;
-    font-weight: 700;
-    line-height: 1.3;
-    color: var(--text);
-}
-
-.jadwal-page .gcal-subtitle {
-    margin: 2px 0 0;
-    font-size: 0.75rem;
-    color: var(--muted);
-}
-
-.jadwal-page .gcal-close {
-    flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    border: 0;
-    border-radius: 50%;
-    background: transparent;
-    color: var(--muted);
-    cursor: pointer;
-    transition: background-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
-}
-
-.jadwal-page .gcal-close:hover {
-    background: var(--green-50);
-    color: var(--text);
-}
-
-.jadwal-page .gcal-body {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    padding: 16px 22px 18px;
-}
-
-.jadwal-page .gcal-info {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 9px 12px;
-    border: 1px solid var(--green-100);
-    border-radius: 8px;
-    background: var(--green-50);
-    color: var(--green-800);
-    font-size: 0.75rem;
-}
-
-.jadwal-page .gcal-info svg { flex: 0 0 15px; }
-
-.jadwal-page .gcal-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.jadwal-page .gcal-option {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 12px 14px;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    background: var(--surface);
-    cursor: pointer;
-    transition: border-color var(--t-fast) var(--ease), background-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
-}
-
-.jadwal-page .gcal-option:hover:not(.is-selected):not(.is-disabled) {
-    border-color: var(--green-200);
-    background: var(--green-50);
-}
-
-.jadwal-page .gcal-option.is-selected {
-    border-color: var(--green-700);
-    background: var(--green-100);
-    box-shadow: 0 0 0 1px var(--green-700);
-}
-
-.jadwal-page .gcal-option.is-disabled {
-    background: var(--green-50);
-    cursor: not-allowed;
-}
-
-.jadwal-page .gcal-option.is-disabled .gcal-option-content { opacity: 0.55; }
-
-.jadwal-page .gcal-radio {
-    appearance: none;
-    -webkit-appearance: none;
-    flex: 0 0 18px;
-    width: 18px;
-    height: 18px;
-    margin: 2px 0 0;
-    border: 2px solid #B8BDAF;
-    border-radius: 50%;
-    background: var(--surface);
-    cursor: inherit;
-    transition: border-color var(--t-fast) var(--ease), background-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
-}
-
-.jadwal-page .gcal-radio:checked {
-    border-color: var(--green-700);
-    background: var(--green-700);
-    box-shadow: inset 0 0 0 3px var(--surface);
-}
-
-.jadwal-page .gcal-radio:focus-visible {
-    outline: 2px solid var(--green-600);
-    outline-offset: 2px;
-}
-
-.jadwal-page .gcal-radio:disabled { opacity: 0.55; }
-
-.jadwal-page .gcal-option-content {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    min-width: 0;
-    flex: 1;
-}
-
-.jadwal-page .gcal-option-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-}
-
-.jadwal-page .gcal-option-title {
-    min-width: 0;
-    font-size: 0.875rem;
-    font-weight: 700;
-    line-height: 1.35;
-    color: var(--text);
-    overflow-wrap: anywhere;
-}
-
-.jadwal-page .gcal-added-badge {
-    flex-shrink: 0;
-    padding: 2px 9px;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    background: var(--surface);
-    color: var(--muted);
-    font-size: 0.625rem;
-    font-weight: 600;
-    white-space: nowrap;
-}
-
-.jadwal-page .gcal-option-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px 16px;
-    color: var(--muted);
-    font-size: 0.75rem;
-    line-height: 1.45;
-}
-
-.jadwal-page .gcal-meta-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    min-width: 0;
-}
-
-.jadwal-page .gcal-meta-item svg { flex: 0 0 13px; }
-.jadwal-page .gcal-sep { opacity: 0.6; }
-.jadwal-page .gcal-meta-place { overflow-wrap: anywhere; }
-
-.jadwal-page .gcal-empty {
-    padding: 28px 16px;
-    color: var(--muted);
-    text-align: center;
-    font-size: 0.8125rem;
-}
-
-.jadwal-page .gcal-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 14px 22px;
-    border-top: 1px solid var(--border);
-}
-
-.jadwal-page .gcal-account {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    min-width: 0;
-    color: var(--muted);
-    font-size: 0.6875rem;
-    overflow-wrap: anywhere;
-}
-
-.jadwal-page .gcal-account strong { color: var(--text); font-weight: 600; }
-
-.jadwal-page .gcal-footer-actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-left: auto;
-}
-
-.jadwal-page .gcal-footer .btn {
-    height: 36px;
-    min-width: 64px;
-    padding: 0 16px;
-    font-size: 0.8125rem;
-    font-weight: 600;
-}
-
-@media (max-width: 479px) {
-    .jadwal-page .gcal-header { padding: 16px; }
-    .jadwal-page .gcal-body { padding: 14px 16px; }
-    .jadwal-page .gcal-footer { flex-wrap: wrap; padding: 12px 16px; }
-    .jadwal-page .gcal-option-top { align-items: flex-start; flex-direction: column; gap: 6px; }
-}
-
-/* ===== HEADER HALAMAN, BREADCRUMB & TAB (menimpa aturan lama) ===== */
-.jadwal-page .jadwal-page-header {
-    display: block;
-    margin-bottom: 20px;
-    padding-bottom: 0;
-    border-bottom: 0;
-}
-
-.jadwal-page .jadwal-breadcrumb {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 14px;
-    color: var(--muted);
-    font-size: 0.75rem;
-}
-
-.jadwal-page .jadwal-breadcrumb svg { flex: 0 0 12px; opacity: 0.7; }
-.jadwal-page .jadwal-breadcrumb strong { color: var(--text); font-weight: 600; }
-
-.jadwal-page .page-title {
-    margin: 0 0 4px;
-    font-size: 1.75rem;
-    letter-spacing: -0.03em;
-}
-
-.jadwal-page .jadwal-subtitle { font-size: 0.8125rem; }
-
-.jadwal-page .jadwal-tabbar {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 10px 16px;
-    margin-top: 18px;
-    border-bottom: 1px solid var(--border);
-}
-
-.jadwal-page .jadwal-tabbar .tab-list {
-    display: flex;
-    gap: 6px;
-    width: auto;
-    max-width: 100%;
-    margin: 0;
-    border-bottom: 0;
-    overflow-x: auto;
-    scrollbar-width: none;
-}
-
-.jadwal-page .jadwal-tabbar .tab-list::-webkit-scrollbar { display: none; }
-
-.jadwal-page .jadwal-tabbar .tab-item {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    min-width: 0;
-    margin: 0 0 -1px;
-    padding: 10px 14px 13px;
-    border: 0;
-    border-bottom: 2px solid transparent;
-    border-radius: 0;
-    background: transparent;
-    color: var(--muted);
-    font: inherit;
-    font-size: 0.8125rem;
-    font-weight: 600;
-    white-space: nowrap;
-    cursor: pointer;
-    transition: color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
-}
-
-.jadwal-page .jadwal-tabbar .tab-item::before,
-.jadwal-page .jadwal-tabbar .tab-item::after { content: none; }
-
-.jadwal-page .jadwal-tabbar .tab-item svg { flex: 0 0 16px; }
-
-.jadwal-page .jadwal-tabbar .tab-item:hover:not(.active) { color: var(--text); }
-
-.jadwal-page .jadwal-tabbar .tab-item.active {
-    color: var(--text);
-    border-bottom-color: var(--green-700);
-}
-
-.jadwal-page .tab-count {
-    padding: 1px 8px;
-    border-radius: 999px;
-    background: var(--green-100);
-    color: var(--green-900);
-    font-size: 0.6875rem;
-    font-weight: 700;
-    line-height: 1.5;
-}
-
-.jadwal-page .jadwal-tabbar .jadwal-header-actions { padding-bottom: 10px; }
-
-.jadwal-page .jadwal-tabbar .jadwal-header-actions .btn {
-    gap: 8px;
-    font-weight: 700;
-}
-
-@media (max-width: 479px) {
-    .jadwal-page .jadwal-tabbar .jadwal-header-actions { width: 100%; }
-}
-
-/* ===== TAB KEGIATAN ===== */
-.jadwal-page .kg-monthbar {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 26px;
-    padding: 12px 14px;
-    border-radius: var(--radius);
-}
-
-.jadwal-page .kg-month-switch {
-    display: inline-flex;
-    align-items: center;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    background: var(--surface);
-    overflow: hidden;
-}
-
-.jadwal-page .kg-month-arrow {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 34px;
-    height: 36px;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    color: var(--text);
-    cursor: pointer;
-    transition: background-color var(--t-fast) var(--ease);
-}
-
-.jadwal-page .kg-month-arrow:hover { background: var(--green-50); }
-
-.jadwal-page .kg-month-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    height: 36px;
-    padding: 0 16px;
-    border-left: 1px solid var(--border);
-    border-right: 1px solid var(--border);
-    color: var(--text);
-    font-size: 0.875rem;
-    font-weight: 700;
-    white-space: nowrap;
-}
-
-.jadwal-page .kg-month-label svg { color: var(--muted); }
-
-.jadwal-page .kg-today-btn {
-    height: 30px;
-    padding: 0 12px;
-    font-size: 0.75rem;
-    font-weight: 600;
-}
-
-.jadwal-page .kg-groups {
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-}
-
-.jadwal-page .kg-day-head {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 14px;
-}
-
-.jadwal-page .kg-today-badge {
-    flex-shrink: 0;
-    padding: 3px 9px;
-    border-radius: 5px;
-    background: var(--green-100);
-    color: var(--green-800);
-    font-size: 0.625rem;
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-}
-
-.jadwal-page .kg-day-title {
-    margin: 0;
-    font-size: 1.25rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--text);
-    white-space: nowrap;
-}
-
-.jadwal-page .kg-day-line {
-    flex: 1;
-    min-width: 20px;
-    height: 1px;
-    background: var(--border);
-}
-
-.jadwal-page .kg-day-count {
-    flex-shrink: 0;
-    color: var(--muted);
-    font-size: 0.75rem;
-}
-
-.jadwal-page .kg-list {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-.jadwal-page .kg-row {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 16px 20px;
-    border-radius: var(--radius);
-    cursor: pointer;
-}
-
-.jadwal-page .kg-row.is-baru {
-    box-shadow: inset 3px 0 0 var(--danger), var(--shadow-sm);
-}
-
-.jadwal-page .kg-row.is-baru:hover {
-    box-shadow: inset 3px 0 0 var(--danger), var(--shadow-md);
-}
-
-.jadwal-page .kg-date-tile {
-    flex: 0 0 54px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 54px;
-    padding: 7px 0;
-    border-radius: 10px;
-    background: var(--green-100);
-    color: var(--green-900);
-    line-height: 1.15;
-}
-
-.jadwal-page .kg-date-month {
-    font-size: 0.625rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-}
-
-.jadwal-page .kg-date-day {
-    font-size: 1.125rem;
-    font-weight: 800;
-}
-
-.jadwal-page .kg-row-main { flex: 1; min-width: 0; }
-
-.jadwal-page .kg-row-top {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 6px;
-}
-
-.jadwal-page .kg-row-title {
-    min-width: 0;
-    margin: 0;
-    font-size: 1rem;
-    font-weight: 700;
-    line-height: 1.35;
-    color: var(--text);
-    overflow-wrap: anywhere;
-}
-
-.jadwal-page .kg-row .badge-baru {
-    flex-shrink: 0;
-    padding: 3px 11px;
-    border-radius: 999px;
-    background: var(--danger);
-    color: #FFFFFF;
-    font-size: 0.6875rem;
-    font-weight: 700;
-    line-height: 1.4;
-}
-
-.jadwal-page .kg-row-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px 18px;
-    color: var(--muted);
-    font-size: 0.8125rem;
-    line-height: 1.45;
-}
-
-.jadwal-page .kg-meta-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    min-width: 0;
-    overflow-wrap: anywhere;
-}
-
-.jadwal-page .kg-meta-item svg { flex: 0 0 14px; }
-
-.jadwal-page .kg-empty {
-    padding: 48px 24px;
-    color: var(--muted);
-    text-align: center;
-    font-size: 0.9375rem;
-}
-
-@media (max-width: 767px) {
-    .jadwal-page .kg-day-title { white-space: normal; font-size: 1.0625rem; }
-    .jadwal-page .kg-day-line { display: none; }
-    .jadwal-page .kg-day-head { flex-wrap: wrap; gap: 6px 10px; }
-    .jadwal-page .kg-day-count { margin-left: auto; }
-}
-
-@media (max-width: 479px) {
-    .jadwal-page .kg-row { gap: 12px; padding: 14px; }
-    .jadwal-page .kg-date-tile { flex-basis: 46px; width: 46px; }
-}
-
+        .jadwal-page .detail-modal {
+            max-width: 600px;
+            width: 100%;
+            padding: 0;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .jadwal-page .detail-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 22px 24px 16px;
+            border-bottom: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .jadwal-page .detail-heading {
+            min-width: 0;
+        }
+
+        .jadwal-page .detail-title {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+            color: var(--text);
+            overflow-wrap: anywhere;
+        }
+
+        .jadwal-page .detail-subtitle {
+            margin: 4px 0 0;
+            font-size: 0.8125rem;
+            color: var(--muted);
+        }
+
+        .jadwal-page .detail-close {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            padding: 0;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            background: var(--surface);
+            color: var(--text);
+            cursor: pointer;
+            transition: background-color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+        }
+
+        .jadwal-page .detail-close:hover {
+            background: var(--green-50);
+            border-color: var(--green-200);
+        }
+
+        .jadwal-page .detail-body {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 18px 24px 22px;
+
+        }
+
+        .jadwal-page .detail-info {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 10px 20px;
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--green-50);
+        }
+
+        .jadwal-page .detail-info-item {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            min-width: 0;
+            font-size: 0.875rem;
+            color: var(--text);
+        }
+
+        .jadwal-page .detail-info-item svg {
+            flex: 0 0 16px;
+            color: var(--muted);
+        }
+
+        .jadwal-page .detail-info-item span {
+            overflow-wrap: anywhere;
+        }
+
+        .jadwal-page .detail-info-place {
+            grid-column: 1 / -1;
+        }
+
+        .jadwal-page .detail-section-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 0 10px;
+            font-size: 0.8125rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .jadwal-page .detail-section-title svg {
+            color: var(--muted);
+        }
+
+        .jadwal-page .detail-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .jadwal-page .detail-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 12px;
+            border: 1px solid var(--green-200);
+            border-radius: 999px;
+            background: var(--green-100);
+            color: var(--green-900);
+            font-size: 0.75rem;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .jadwal-page .detail-desc {
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--surface);
+            color: var(--text);
+            font-size: 0.875rem;
+            line-height: 1.7;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        .jadwal-page .detail-empty {
+            color: var(--muted);
+            font-size: 0.8125rem;
+            font-style: italic;
+        }
+
+        .jadwal-page .detail-tugas-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .jadwal-page .detail-tugas-head .detail-section-title {
+            margin: 0;
+        }
+
+        .jadwal-page .detail-tugas-add {
+            height: 30px;
+            padding: 0 10px;
+            font-size: 0.75rem;
+            gap: 5px;
+        }
+
+        .jadwal-page .detail-tugas-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .jadwal-page .detail-tugas-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--surface);
+        }
+
+        .jadwal-page .detail-tugas-main {
+            min-width: 0;
+        }
+
+        .jadwal-page .detail-tugas-title {
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--text);
+            overflow-wrap: anywhere;
+        }
+
+        .jadwal-page .detail-tugas-meta {
+            margin-top: 2px;
+            font-size: 0.6875rem;
+            color: var(--muted);
+        }
+
+        .jadwal-page .detail-tugas-badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .jadwal-page .detail-tugas-badges .badge {
+            font-size: 0.6875rem;
+        }
+
+        .jadwal-page .detail-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 14px 24px;
+            border-top: 1px solid var(--border);
+            background: var(--green-50);
+        }
+
+        .jadwal-page .detail-footer-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: auto;
+        }
+
+        .jadwal-page .detail-footer .btn {
+            height: 36px;
+            padding: 0 16px;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            gap: 7px;
+        }
+
+        .jadwal-page .detail-edit {
+            border-color: var(--green-900);
+        }
+
+        .jadwal-page .detail-delete {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            height: 36px;
+            padding: 0 10px;
+            border: 0;
+            border-radius: 8px;
+            background: transparent;
+            color: var(--danger);
+            font: inherit;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color var(--t-fast) var(--ease);
+        }
+
+        .jadwal-page .detail-delete:hover {
+            background: var(--danger-bg);
+        }
+
+        @media (max-width: 479px) {
+            .jadwal-page .detail-header {
+                padding: 18px 16px 14px;
+            }
+
+            .jadwal-page .detail-body {
+                padding: 16px;
+            }
+
+            .jadwal-page .detail-info {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .jadwal-page .detail-footer {
+                flex-wrap: wrap;
+                padding: 12px 16px;
+            }
+
+            .jadwal-page .detail-tugas-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .jadwal-page .detail-tugas-badges {
+                justify-content: flex-start;
+            }
+        }
+
+        /* ===== POPUP PILIH EVENT GOOGLE CALENDAR ===== */
+        .jadwal-page .gcal-modal {
+            max-width: 560px;
+            width: 100%;
+            padding: 0;
+            border-radius: 16px;
+        }
+
+        .jadwal-page .gcal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            padding: 18px 22px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .jadwal-page .gcal-header-main {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+        }
+
+        .jadwal-page .gcal-header-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 38px;
+            width: 38px;
+            height: 38px;
+            border: 1px solid var(--green-200);
+            border-radius: 10px;
+            background: var(--green-100);
+            color: var(--green-700);
+        }
+
+        .jadwal-page .gcal-title {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--text);
+        }
+
+        .jadwal-page .gcal-subtitle {
+            margin: 2px 0 0;
+            font-size: 0.75rem;
+            color: var(--muted);
+        }
+
+        .jadwal-page .gcal-close {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            border: 0;
+            border-radius: 50%;
+            background: transparent;
+            color: var(--muted);
+            cursor: pointer;
+            transition: background-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+        }
+
+        .jadwal-page .gcal-close:hover {
+            background: var(--green-50);
+            color: var(--text);
+        }
+
+        .jadwal-page .gcal-body {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            padding: 16px 22px 18px;
+        }
+
+        .jadwal-page .gcal-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 12px;
+            border: 1px solid var(--green-100);
+            border-radius: 8px;
+            background: var(--green-50);
+            color: var(--green-800);
+            font-size: 0.75rem;
+        }
+
+        .jadwal-page .gcal-info svg {
+            flex: 0 0 15px;
+        }
+
+        .jadwal-page .gcal-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .jadwal-page .gcal-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 14px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--surface);
+            cursor: pointer;
+            transition: border-color var(--t-fast) var(--ease), background-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+        }
+
+        .jadwal-page .gcal-option:hover:not(.is-selected):not(.is-disabled) {
+            border-color: var(--green-200);
+            background: var(--green-50);
+        }
+
+        .jadwal-page .gcal-option.is-selected {
+            border-color: var(--green-700);
+            background: var(--green-100);
+            box-shadow: 0 0 0 1px var(--green-700);
+        }
+
+        .jadwal-page .gcal-option.is-disabled {
+            background: var(--green-50);
+            cursor: not-allowed;
+        }
+
+        .jadwal-page .gcal-option.is-disabled .gcal-option-content {
+            opacity: 0.55;
+        }
+
+        .jadwal-page .gcal-radio {
+            appearance: none;
+            -webkit-appearance: none;
+            flex: 0 0 18px;
+            width: 18px;
+            height: 18px;
+            margin: 2px 0 0;
+            border: 2px solid #B8BDAF;
+            border-radius: 50%;
+            background: var(--surface);
+            cursor: inherit;
+            transition: border-color var(--t-fast) var(--ease), background-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+        }
+
+        .jadwal-page .gcal-radio:checked {
+            border-color: var(--green-700);
+            background: var(--green-700);
+            box-shadow: inset 0 0 0 3px var(--surface);
+        }
+
+        .jadwal-page .gcal-radio:focus-visible {
+            outline: 2px solid var(--green-600);
+            outline-offset: 2px;
+        }
+
+        .jadwal-page .gcal-radio:disabled {
+            opacity: 0.55;
+        }
+
+        .jadwal-page .gcal-option-content {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            min-width: 0;
+            flex: 1;
+        }
+
+        .jadwal-page .gcal-option-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .jadwal-page .gcal-option-title {
+            min-width: 0;
+            font-size: 0.875rem;
+            font-weight: 700;
+            line-height: 1.35;
+            color: var(--text);
+            overflow-wrap: anywhere;
+        }
+
+        .jadwal-page .gcal-added-badge {
+            flex-shrink: 0;
+            padding: 2px 9px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            background: var(--surface);
+            color: var(--muted);
+            font-size: 0.625rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .jadwal-page .gcal-option-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 16px;
+            color: var(--muted);
+            font-size: 0.75rem;
+            line-height: 1.45;
+        }
+
+        .jadwal-page .gcal-meta-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            min-width: 0;
+        }
+
+        .jadwal-page .gcal-meta-item svg {
+            flex: 0 0 13px;
+        }
+
+        .jadwal-page .gcal-sep {
+            opacity: 0.6;
+        }
+
+        .jadwal-page .gcal-meta-place {
+            overflow-wrap: anywhere;
+        }
+
+        .jadwal-page .gcal-empty {
+            padding: 28px 16px;
+            color: var(--muted);
+            text-align: center;
+            font-size: 0.8125rem;
+        }
+
+        .jadwal-page .gcal-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 14px 22px;
+            border-top: 1px solid var(--border);
+        }
+
+        .jadwal-page .gcal-account {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            min-width: 0;
+            color: var(--muted);
+            font-size: 0.6875rem;
+            overflow-wrap: anywhere;
+        }
+
+        .jadwal-page .gcal-account strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .jadwal-page .gcal-footer-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: auto;
+        }
+
+        .jadwal-page .gcal-footer .btn {
+            height: 36px;
+            min-width: 64px;
+            padding: 0 16px;
+            font-size: 0.8125rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 479px) {
+            .jadwal-page .gcal-header {
+                padding: 16px;
+            }
+
+            .jadwal-page .gcal-body {
+                padding: 14px 16px;
+            }
+
+            .jadwal-page .gcal-footer {
+                flex-wrap: wrap;
+                padding: 12px 16px;
+            }
+
+            .jadwal-page .gcal-option-top {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 6px;
+            }
+        }
+
+        /* ===== HEADER HALAMAN, BREADCRUMB & TAB (menimpa aturan lama) ===== */
+        .jadwal-page .jadwal-page-header {
+            display: block;
+            margin-bottom: 20px;
+            padding-bottom: 0;
+            border-bottom: 0;
+        }
+
+        .jadwal-page .jadwal-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 14px;
+            color: var(--muted);
+            font-size: 0.75rem;
+        }
+
+        .jadwal-page .jadwal-breadcrumb svg {
+            flex: 0 0 12px;
+            opacity: 0.7;
+        }
+
+        .jadwal-page .jadwal-breadcrumb strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .jadwal-page .page-title {
+            margin: 0 0 4px;
+            font-size: 1.75rem;
+            letter-spacing: -0.03em;
+        }
+
+        .jadwal-page .jadwal-subtitle {
+            font-size: 0.8125rem;
+        }
+
+        .jadwal-page .jadwal-tabbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 10px 16px;
+            margin-top: 18px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .jadwal-page .jadwal-tabbar .tab-list {
+            display: flex;
+            gap: 6px;
+            width: auto;
+            max-width: 100%;
+            margin: 0;
+            border-bottom: 0;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .jadwal-page .jadwal-tabbar .tab-list::-webkit-scrollbar {
+            display: none;
+        }
+
+        .jadwal-page .jadwal-tabbar .tab-item {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-width: 0;
+            margin: 0 0 -1px;
+            padding: 10px 14px 13px;
+            border: 0;
+            border-bottom: 2px solid transparent;
+            border-radius: 0;
+            background: transparent;
+            color: var(--muted);
+            font: inherit;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+        }
+
+        .jadwal-page .jadwal-tabbar .tab-item::before,
+        .jadwal-page .jadwal-tabbar .tab-item::after {
+            content: none;
+        }
+
+        .jadwal-page .jadwal-tabbar .tab-item svg {
+            flex: 0 0 16px;
+        }
+
+        .jadwal-page .jadwal-tabbar .tab-item:hover:not(.active) {
+            color: var(--text);
+        }
+
+        .jadwal-page .jadwal-tabbar .tab-item.active {
+            color: var(--text);
+            border-bottom-color: var(--green-700);
+        }
+
+        .jadwal-page .tab-count {
+            padding: 1px 8px;
+            border-radius: 999px;
+            background: var(--green-100);
+            color: var(--green-900);
+            font-size: 0.6875rem;
+            font-weight: 700;
+            line-height: 1.5;
+        }
+
+        .jadwal-page .jadwal-tabbar .jadwal-header-actions {
+            padding-bottom: 10px;
+        }
+
+        .jadwal-page .jadwal-tabbar .jadwal-header-actions .btn {
+            gap: 8px;
+            font-weight: 700;
+        }
+
+        @media (max-width: 479px) {
+            .jadwal-page .jadwal-tabbar .jadwal-header-actions {
+                width: 100%;
+            }
+        }
+
+        /* ===== TAB KEGIATAN ===== */
+        .jadwal-page .kg-monthbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 26px;
+            padding: 12px 14px;
+            border-radius: var(--radius);
+        }
+
+        .jadwal-page .kg-month-switch {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--surface);
+            overflow: hidden;
+        }
+
+        .jadwal-page .kg-month-arrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 36px;
+            padding: 0;
+            border: 0;
+            background: transparent;
+            color: var(--text);
+            cursor: pointer;
+            transition: background-color var(--t-fast) var(--ease);
+        }
+
+        .jadwal-page .kg-month-arrow:hover {
+            background: var(--green-50);
+        }
+
+        .jadwal-page .kg-month-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            height: 36px;
+            padding: 0 16px;
+            border-left: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            color: var(--text);
+            font-size: 0.875rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .jadwal-page .kg-month-label svg {
+            color: var(--muted);
+        }
+
+        .jadwal-page .kg-today-btn {
+            height: 30px;
+            padding: 0 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .jadwal-page .kg-groups {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .jadwal-page .kg-day-head {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .jadwal-page .kg-today-badge {
+            flex-shrink: 0;
+            padding: 3px 9px;
+            border-radius: 5px;
+            background: var(--green-100);
+            color: var(--green-800);
+            font-size: 0.625rem;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .jadwal-page .kg-day-title {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--text);
+            white-space: nowrap;
+        }
+
+        .jadwal-page .kg-day-line {
+            flex: 1;
+            min-width: 20px;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .jadwal-page .kg-day-count {
+            flex-shrink: 0;
+            color: var(--muted);
+            font-size: 0.75rem;
+        }
+
+        .jadwal-page .kg-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .jadwal-page .kg-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            border-radius: var(--radius);
+            cursor: pointer;
+        }
+
+        .jadwal-page .kg-row.is-baru {
+            box-shadow: inset 3px 0 0 var(--danger), var(--shadow-sm);
+        }
+
+        .jadwal-page .kg-row.is-baru:hover {
+            box-shadow: inset 3px 0 0 var(--danger), var(--shadow-md);
+        }
+
+        .jadwal-page .kg-date-tile {
+            flex: 0 0 54px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 54px;
+            padding: 7px 0;
+            border-radius: 10px;
+            background: var(--green-100);
+            color: var(--green-900);
+            line-height: 1.15;
+        }
+
+        .jadwal-page .kg-date-month {
+            font-size: 0.625rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .jadwal-page .kg-date-day {
+            font-size: 1.125rem;
+            font-weight: 800;
+        }
+
+        .jadwal-page .kg-row-main {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .jadwal-page .kg-row-top {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+
+        .jadwal-page .kg-row-title {
+            min-width: 0;
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.35;
+            color: var(--text);
+            overflow-wrap: anywhere;
+        }
+
+        .jadwal-page .kg-row .badge-baru {
+            flex-shrink: 0;
+            padding: 3px 11px;
+            border-radius: 999px;
+            background: var(--danger);
+            color: #FFFFFF;
+            font-size: 0.6875rem;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        .jadwal-page .kg-row-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 18px;
+            color: var(--muted);
+            font-size: 0.8125rem;
+            line-height: 1.45;
+        }
+
+        .jadwal-page .kg-meta-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
+
+        .jadwal-page .kg-meta-item svg {
+            flex: 0 0 14px;
+        }
+
+        .jadwal-page .kg-empty {
+            padding: 48px 24px;
+            color: var(--muted);
+            text-align: center;
+            font-size: 0.9375rem;
+        }
+
+        @media (max-width: 767px) {
+            .jadwal-page .kg-day-title {
+                white-space: normal;
+                font-size: 1.0625rem;
+            }
+
+            .jadwal-page .kg-day-line {
+                display: none;
+            }
+
+            .jadwal-page .kg-day-head {
+                flex-wrap: wrap;
+                gap: 6px 10px;
+            }
+
+            .jadwal-page .kg-day-count {
+                margin-left: auto;
+            }
+        }
+
+        @media (max-width: 479px) {
+            .jadwal-page .kg-row {
+                gap: 12px;
+                padding: 14px;
+            }
+
+            .jadwal-page .kg-date-tile {
+                flex-basis: 46px;
+                width: 46px;
+            }
+        }
+
+        /* ===== FILTER & PENCARIAN ===== */
+        [x-cloak] {
+            display: none !important;
+        }
+
+        .jadwal-page .fb-search {
+            position: relative;
+            display: flex;
+            align-items: center;
+            flex: 1 1 240px;
+            min-width: 0;
+        }
+
+        .jadwal-page .fb-search>svg {
+            position: absolute;
+            left: 12px;
+            width: 16px;
+            height: 16px;
+            color: var(--muted);
+            pointer-events: none;
+        }
+
+        .jadwal-page .fb-search input {
+            width: 100%;
+            height: 38px;
+            padding: 0 36px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--surface);
+            color: var(--text);
+            font: inherit;
+            font-size: 0.8125rem;
+            transition: border-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+        }
+
+        .jadwal-page .fb-search input::placeholder {
+            color: var(--muted);
+        }
+
+        .jadwal-page .fb-search input:focus {
+            outline: none;
+            border-color: var(--green-600);
+            box-shadow: 0 0 0 3px var(--green-100);
+        }
+
+        .jadwal-page .fb-search input[type="search"]::-webkit-search-cancel-button,
+        .jadwal-page .fb-search input[type="search"]::-webkit-search-decoration {
+            -webkit-appearance: none;
+            appearance: none;
+            display: none;
+        }
+
+        .jadwal-page .fb-clear {
+            position: absolute;
+            right: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px;
+            height: 26px;
+            padding: 0;
+            border: 0;
+            border-radius: 6px;
+            background: transparent;
+            color: var(--muted);
+            cursor: pointer;
+            transition: background-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+        }
+
+        .jadwal-page .fb-clear:hover {
+            background: var(--green-50);
+            color: var(--text);
+        }
+
+        /* Pencarian di bilah bulan (tab Kegiatan) */
+        .jadwal-page .kg-search {
+            flex: 0 1 320px;
+            margin-left: auto;
+        }
+
+        /* Bilah filter (tab Riwayat) */
+        .jadwal-page .fb-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+            padding: 12px 14px;
+            border-radius: var(--radius);
+        }
+
+        .jadwal-page .fb-select {
+            flex: 0 1 180px;
+            height: 38px;
+            min-width: 150px;
+            padding: 0 34px 0 12px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--surface) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B7360' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>") no-repeat right 12px center;
+            color: var(--text);
+            font: inherit;
+            font-size: 0.8125rem;
+            appearance: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+            transition: border-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+        }
+
+        .jadwal-page .fb-select:focus {
+            outline: none;
+            border-color: var(--green-600);
+            box-shadow: 0 0 0 3px var(--green-100);
+        }
+
+        .jadwal-page .fb-reset {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            height: 38px;
+            padding: 0 12px;
+            border: 0;
+            border-radius: 10px;
+            background: transparent;
+            color: var(--green-800);
+            font: inherit;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color var(--t-fast) var(--ease);
+        }
+
+        .jadwal-page .fb-reset:hover {
+            background: var(--green-50);
+        }
+
+        .jadwal-page .fb-info {
+            margin: -8px 0 16px;
+            color: var(--muted);
+            font-size: 0.75rem;
+        }
+
+        .jadwal-page .fb-info strong {
+            color: var(--text);
+        }
+
+        @media (max-width: 767px) {
+            .jadwal-page .kg-search {
+                flex: 1 1 100%;
+                margin-left: 0;
+            }
+
+            .jadwal-page .fb-select {
+                flex: 1 1 calc(50% - 5px);
+                min-width: 0;
+            }
+        }
+
+        /* ===== PEMILIH BULAN (RIWAYAT) ===== */
+        .jadwal-page .fb-bar {
+            overflow: visible;
+        }
+
+        .jadwal-page .fb-month {
+            position: relative;
+            flex: 0 0 auto;
+        }
+
+        .jadwal-page .fb-month .kg-month-switch {
+            height: 38px;
+        }
+
+        .jadwal-page .fb-month .kg-month-arrow {
+            height: 36px;
+        }
+
+        .jadwal-page .fb-month-label {
+            min-width: 160px;
+            justify-content: center;
+            border-top: 0;
+            border-bottom: 0;
+            background: transparent;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background-color var(--t-fast) var(--ease);
+        }
+
+        .jadwal-page .fb-month-label:hover {
+            background: var(--green-50);
+        }
+
+        .jadwal-page .fb-pop {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            z-index: 30;
+            width: 264px;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--surface);
+            box-shadow: var(--shadow-md);
+        }
+
+        .jadwal-page .fb-pop-year {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.875rem;
+            color: var(--text);
+        }
+
+        .jadwal-page .fb-pop-year .kg-month-arrow {
+            width: 30px;
+            height: 30px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        .jadwal-page .fb-pop-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 6px;
+        }
+
+        .jadwal-page .fb-pop-month {
+            position: relative;
+            height: 36px;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            background: transparent;
+            color: var(--text);
+            font: inherit;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+        }
+
+        .jadwal-page .fb-pop-month:hover {
+            background: var(--green-50);
+        }
+
+        .jadwal-page .fb-pop-month.has-data::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            width: 4px;
+            height: 4px;
+            margin-left: -2px;
+            border-radius: 50%;
+            background: var(--success);
+        }
+
+        .jadwal-page .fb-pop-month.is-active {
+            background: var(--green-700);
+            color: #FFFFFF;
+        }
+
+        .jadwal-page .fb-pop-month.is-active.has-data::after {
+            background: #FFFFFF;
+        }
+
+        .jadwal-page .fb-pop-foot {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border);
+        }
+
+        .jadwal-page .fb-pop-link {
+            padding: 4px 8px;
+            border: 0;
+            border-radius: 6px;
+            background: transparent;
+            color: var(--green-800);
+            font: inherit;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .jadwal-page .fb-pop-link:hover {
+            background: var(--green-50);
+        }
+
+        @media (max-width: 767px) {
+            .jadwal-page .fb-month {
+                flex: 1 1 100%;
+            }
+
+            .jadwal-page .fb-month .kg-month-switch {
+                width: 100%;
+            }
+
+            .jadwal-page .fb-month-label {
+                flex: 1;
+            }
+
+            .jadwal-page .fb-pop {
+                width: 100%;
+            }
+        }
     </style>
 
-        {{-- HEADER HALAMAN & TAB NAVIGASI --}}
+    {{-- HEADER HALAMAN & TAB NAVIGASI --}}
     @php
-        $kegiatanBulanCount = ($active_tab === 'kegiatan' && isset($daftarBulananGrouped))
-            ? $daftarBulananGrouped->sum(fn ($items) => count($items))
-            : null;
+    $kegiatanBulanCount = ($active_tab === 'kegiatan' && isset($daftarBulananGrouped))
+    ? $daftarBulananGrouped->sum(fn ($items) => count($items))
+    : null;
     @endphp
     <div class="jadwal-page-header">
-        <nav class="jadwal-breadcrumb" aria-label="Breadcrumb">
-            <span>Portal Administrasi</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-            <strong>Jadwal Kegiatan</strong>
-        </nav>
+
 
         <h1 class="page-title">Jadwal Kegiatan</h1>
         <p class="jadwal-subtitle">Pemantauan dan koordinasi agenda biro secara berkala</p>
@@ -1398,18 +1828,30 @@
             {{-- Tab: Kalender | Kegiatan | Riwayat --}}
             <div class="tab-list" role="tablist">
                 <button type="button" wire:click="setTab('kalender')" class="tab-item {{ $active_tab === 'kalender' ? 'active' : '' }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                        <path d="M3 9h18M3 15h18M9 3v18M15 3v18" />
+                    </svg>
                     <span>Kalender</span>
                 </button>
                 <button type="button" wire:click="setTab('kegiatan')" class="tab-item {{ $active_tab === 'kegiatan' ? 'active' : '' }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
                     <span>Kegiatan</span>
                     @if($kegiatanBulanCount !== null)
-                        <span class="tab-count">{{ $kegiatanBulanCount }}</span>
+                    <span class="tab-count">{{ $kegiatanBulanCount }}</span>
                     @endif
                 </button>
                 <button type="button" wire:click="setTab('riwayat')" class="tab-item {{ $active_tab === 'riwayat' ? 'active' : '' }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M3 12a9 9 0 1 0 3-6.7L3 8" />
+                        <path d="M3 3v5h5" />
+                        <path d="M12 7v5l4 2" />
+                    </svg>
                     <span>Riwayat</span>
                 </button>
             </div>
@@ -1417,15 +1859,19 @@
             {{-- Tombol Aksi Kanan --}}
             <div class="jadwal-header-actions">
                 @if($active_tab === 'riwayat')
-                    <button type="button" class="btn btn-primary" wire:click="openExportModal">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-                        <span>Export PDF</span>
-                    </button>
+                <button type="button" class="btn btn-primary" wire:click="openExportModal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" x2="12" y1="15" y2="3" />
+                    </svg>
+                    <span>Export PDF</span>
+                </button>
                 @elseif($isKabag && in_array($active_tab, ['kalender', 'kegiatan'], true))
-                    <button type="button" class="btn btn-primary" wire:click="openCreateModal">
-                        <x-icon name="plus" :size="18" />
-                        <span>Tambah Kegiatan</span>
-                    </button>
+                <button type="button" class="btn btn-primary" wire:click="openCreateModal">
+                    <x-icon name="plus" :size="18" />
+                    <span>Tambah Kegiatan</span>
+                </button>
                 @endif
             </div>
         </div>
@@ -1447,11 +1893,26 @@
                     </button>
                 </div>
                 <div class="calendar-controls">
-                    <button type="button" class="btn btn-secondary calendar-nav-button" wire:click="prevMonth" title="Bulan Sebelumnya" aria-label="Bulan sebelumnya">
-                        &larr;
+                    <button type="button" class="btn btn-secondary calendar-nav-button"
+                        wire:click="prevMonth"
+                        title="Bulan Sebelumnya"
+                        aria-label="Bulan sebelumnya">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m15 18-6-6 6-6" />
+                        </svg>
                     </button>
-                    <button type="button" class="btn btn-secondary calendar-nav-button" wire:click="nextMonth" title="Bulan Berikutnya" aria-label="Bulan berikutnya">
-                        &rarr;
+
+                    <button type="button" class="btn btn-secondary calendar-nav-button"
+                        wire:click="nextMonth"
+                        title="Bulan Berikutnya"
+                        aria-label="Bulan berikutnya">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m9 18 6-6-6-6" />
+                        </svg>
                     </button>
                 </div>
             </div>
@@ -1541,24 +2002,58 @@
         </div>
     </div>
 
-        {{-- TAB 2: KEGIATAN (DAFTAR BULANAN) --}}
+    {{-- TAB 2: KEGIATAN (DAFTAR BULANAN) --}}
     @elseif($active_tab === 'kegiatan')
-    <div>
-        {{-- Navigasi Bulan --}}
+    <div x-data="{
+        q: '',
+        n() { return this.q.trim().toLowerCase(); },
+        hit(el) { const n = this.n(); return !n || (el.dataset.judul || '').includes(n); },
+        grp(sec) { const n = this.n(); return !n || Array.from(sec.querySelectorAll('[data-judul]')).some(c => (c.dataset.judul || '').includes(n)); },
+        none(list) { const n = this.n(); if (!n || !list) return false; return !Array.from(list.querySelectorAll('[data-judul]')).some(c => (c.dataset.judul || '').includes(n)); }
+    }">
+        {{-- Navigasi bulan + pencarian --}}
         <div class="card kg-monthbar">
             <div class="kg-month-switch">
                 <button type="button" class="kg-month-arrow" wire:click="prevMonth" aria-label="Bulan sebelumnya">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
                 </button>
                 <span class="kg-month-label">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
                     {{ $monthName }}
                 </span>
                 <button type="button" class="kg-month-arrow" wire:click="nextMonth" aria-label="Bulan berikutnya">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="9 18 15 12 9 6" />
+                    </svg>
                 </button>
             </div>
             <button type="button" wire:click="goToToday" class="btn btn-secondary kg-today-btn">Bulan Ini</button>
+
+            <div class="fb-search kg-search">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+                <input
+                    type="search"
+                    x-model="q"
+                    placeholder="Cari judul kegiatan..."
+                    aria-label="Cari judul kegiatan"
+                    autocomplete="off">
+                <button type="button" class="fb-clear" x-show="q" x-cloak @click="q = ''" aria-label="Hapus pencarian">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
         </div>
 
         @if($daftarBulananGrouped->isEmpty())
@@ -1566,12 +2061,12 @@
             <p>Tidak ada jadwal kegiatan pada bulan {{ $monthName }}.</p>
         </div>
         @else
-        <div class="kg-groups">
+        <div class="kg-groups" x-ref="kglist">
             @foreach($daftarBulananGrouped as $dateKey => $items)
             @php
-                $dateCarbon = \Carbon\Carbon::parse($dateKey, 'Asia/Jakarta');
+            $dateCarbon = \Carbon\Carbon::parse($dateKey, 'Asia/Jakarta');
             @endphp
-            <section wire:key="kg-group-{{ $dateKey }}">
+            <section wire:key="kg-group-{{ $dateKey }}" x-show="grp($el)">
                 {{-- Judul kelompok tanggal --}}
                 <div class="kg-day-head">
                     @if($dateCarbon->isToday())
@@ -1585,14 +2080,16 @@
                 <div class="kg-list">
                     @foreach($items as $kegiatan)
                     @php
-                        $isBaruRow = !$kegiatan->is_dilihat;
-                        $picCount = $kegiatan->pics->count();
-                        $picLabel = $picCount === 1 ? $kegiatan->pics->first()->name : $picCount . ' orang';
+                    $isBaruRow = !$kegiatan->is_dilihat;
+                    $picCount = $kegiatan->pics->count();
+                    $picLabel = $picCount === 1 ? $kegiatan->pics->first()->name : $picCount . ' orang';
                     @endphp
                     <div
                         class="card card-clickable kg-row {{ $isBaruRow ? 'is-baru' : '' }}"
                         wire:click="openDetailModal({{ $kegiatan->id }})"
-                        wire:key="bulanan-kegiatan-{{ $kegiatan->id }}">
+                        wire:key="bulanan-kegiatan-{{ $kegiatan->id }}"
+                        data-judul="{{ mb_strtolower($kegiatan->judul) }}"
+                        x-show="hit($el)">
                         <div class="kg-date-tile" aria-hidden="true">
                             <span class="kg-date-month">{{ $dateCarbon->translatedFormat('M') }}</span>
                             <span class="kg-date-day">{{ $dateCarbon->format('d') }}</span>
@@ -1608,16 +2105,27 @@
 
                             <div class="kg-row-meta">
                                 <span class="kg-meta-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <circle cx="12" cy="12" r="10" />
+                                        <polyline points="12 6 12 12 16 14" />
+                                    </svg>
                                     {{ $kegiatan->waktu_formatted }}
                                 </span>
                                 <span class="kg-meta-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                                        <circle cx="12" cy="10" r="3" />
+                                    </svg>
                                     {{ $kegiatan->tempat }}
                                 </span>
                                 @if($picCount > 0)
                                 <span class="kg-meta-item" title="{{ $kegiatan->pics->pluck('name')->join(', ') }}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                        <circle cx="9" cy="7" r="4" />
+                                        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                    </svg>
                                     PIC: {{ $picLabel }}
                                 </span>
                                 @endif
@@ -1629,28 +2137,173 @@
             </section>
             @endforeach
         </div>
+
+        <div class="card kg-empty" x-show="none($refs.kglist)" x-cloak>
+            <p>Tidak ada kegiatan dengan judul tersebut pada bulan {{ $monthName }}.</p>
+        </div>
         @endif
     </div>
 
     {{-- TAB 3: RIWAYAT (KEGIATAN SEBELUM HARI INI WIB) --}}
     @elseif($active_tab === 'riwayat')
-    <div>
+    @php
+    $rwSemua = $riwayatKegiatans;
+    $rwBulanOpsi = $rwSemua
+    ->map(fn ($k) => \Carbon\Carbon::parse($k->tanggal, 'Asia/Jakarta')->format('Y-m'))
+    ->unique()->sortDesc()->values();
+    $rwPicOpsi = $rwSemua->flatMap(fn ($k) => $k->pics)->unique('id')->sortBy('name')->values();
+    $rwNowYm = \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m');
+    $rwAda = $rwBulanOpsi->all();
+    @endphp
+    <div x-data="{
+        q: '', bulan: '', pic: '',
+        open: false,
+        py: {{ (int) substr($rwNowYm, 0, 4) }},
+        nowYm: '{{ $rwNowYm }}',
+        ada: @js($rwAda),
+        nama: ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'],
+        pendek: ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'],
+        n() { return this.q.trim().toLowerCase(); },
+        aktif() { return !!(this.q.trim() || this.bulan || this.pic); },
+        label() {
+            if (!this.bulan) return 'Semua bulan';
+            const p = this.bulan.split('-');
+            return this.nama[Number(p[1]) - 1] + ' ' + p[0];
+        },
+        ym(i) { return this.py + '-' + String(i + 1).padStart(2, '0'); },
+        geser(d) {
+            const p = (this.bulan || this.nowYm).split('-').map(Number);
+            let y = p[0], m = p[1] + d;
+            if (m < 1) { m = 12; y--; } else if (m > 12) { m = 1; y++; }
+            this.bulan = y + '-' + String(m).padStart(2, '0');
+            this.py = y;
+        },
+        pilih(i) { this.bulan = this.ym(i); this.open = false; },
+        hit(el) {
+            const d = el.dataset, n = this.n();
+            return (!n || (d.judul || '').includes(n))
+                && (!this.bulan || d.bulan === this.bulan)
+                && (!this.pic || (d.pics || '').includes('|' + this.pic + '|'));
+        },
+        semua(list) { return list ? list.querySelectorAll('[data-judul]').length : 0; },
+        tampil(list) { return list ? Array.from(list.querySelectorAll('[data-judul]')).filter(el => this.hit(el)).length : 0; },
+        reset() { this.q = ''; this.bulan = ''; this.pic = ''; }
+    }">
         <div style="margin-bottom: 16px;">
             <h2 style="font-size: 1.125rem; font-weight: 700; color: var(--text);">Riwayat Kegiatan</h2>
             <p style="font-size: 0.8125rem; color: var(--muted);">Daftar seluruh kegiatan lampau sebelum hari ini (WIB), diurutkan dari yang terbaru.</p>
         </div>
 
-        @if($riwayatKegiatans->isEmpty())
+        @if($rwSemua->isEmpty())
         <div class="card" style="text-align: center; padding: 48px 24px; color: var(--muted);">
             <p style="font-size: 1rem;">Belum ada riwayat kegiatan lampau.</p>
         </div>
         @else
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px;">
-            @foreach($riwayatKegiatans as $kegiatan)
+        {{-- Bilah filter --}}
+        <div class="card fb-bar">
+            <div class="fb-search">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+                <input
+                    type="search"
+                    x-model="q"
+                    placeholder="Cari judul kegiatan..."
+                    aria-label="Cari judul kegiatan"
+                    autocomplete="off">
+                <button type="button" class="fb-clear" x-show="q" x-cloak @click="q = ''" aria-label="Hapus pencarian">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="fb-month" @click.outside="open = false" @keydown.escape.window="open = false">
+                <div class="kg-month-switch">
+                    <button type="button" class="kg-month-arrow" @click="geser(-1)" aria-label="Bulan sebelumnya">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="15 18 9 12 15 6" />
+                        </svg>
+                    </button>
+                    <button type="button" class="kg-month-label fb-month-label"
+                        @click="open = !open; if (open) py = bulan ? Number(bulan.split('-')[0]) : py"
+                        :aria-expanded="open">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                            <line x1="16" y1="2" x2="16" y2="6" />
+                            <line x1="8" y1="2" x2="8" y2="6" />
+                            <line x1="3" y1="10" x2="21" y2="10" />
+                        </svg>
+                        <span x-text="label()"></span>
+                    </button>
+                    <button type="button" class="kg-month-arrow" @click="geser(1)" aria-label="Bulan berikutnya">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="9 18 15 12 9 6" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="fb-pop" x-show="open" x-cloak x-transition.opacity.duration.150ms>
+                    <div class="fb-pop-year">
+                        <button type="button" class="kg-month-arrow" @click="py--" aria-label="Tahun sebelumnya">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="15 18 9 12 15 6" />
+                            </svg>
+                        </button>
+                        <strong x-text="py"></strong>
+                        <button type="button" class="kg-month-arrow" @click="py++" aria-label="Tahun berikutnya">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="9 18 15 12 9 6" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="fb-pop-grid">
+                        <template x-for="(nm, i) in pendek" :key="i">
+                            <button type="button" class="fb-pop-month"
+                                :class="{ 'is-active': bulan === ym(i), 'has-data': ada.includes(ym(i)) }"
+                                @click="pilih(i)" x-text="nm"></button>
+                        </template>
+                    </div>
+
+                    <div class="fb-pop-foot">
+                        <button type="button" class="fb-pop-link" @click="bulan = ''; open = false">Semua bulan</button>
+                        <button type="button" class="fb-pop-link"
+                            @click="bulan = nowYm; py = Number(nowYm.split('-')[0]); open = false">Bulan ini</button>
+                    </div>
+                </div>
+            </div>
+
+            <select class="fb-select" x-model="pic" aria-label="Filter PIC">
+                <option value="">Semua PIC</option>
+                @foreach($rwPicOpsi as $picOpt)
+                <option value="{{ $picOpt->id }}">{{ $picOpt->name }}</option>
+                @endforeach
+            </select>
+
+            <button type="button" class="fb-reset" x-show="aktif()" x-cloak @click="reset()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="1 4 1 10 7 10" />
+                    <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
+                </svg>
+                Reset
+            </button>
+        </div>
+
+
+
+        <div x-ref="rwlist" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px;">
+            @foreach($rwSemua as $kegiatan)
             <div
                 class="card card-clickable"
                 wire:click="openDetailModal({{ $kegiatan->id }})"
                 wire:key="riwayat-kegiatan-{{ $kegiatan->id }}"
+                data-judul="{{ mb_strtolower($kegiatan->judul) }}"
+                data-bulan="{{ \Carbon\Carbon::parse($kegiatan->tanggal, 'Asia/Jakarta')->format('Y-m') }}"
+                data-pics="|{{ $kegiatan->pics->pluck('id')->implode('|') }}|"
+                x-show="hit($el)"
                 style="padding: 16px;">
                 <div style="margin-bottom: 6px;">
                     <span style="font-size: 0.75rem; font-weight: 600; color: var(--muted);">
@@ -1675,11 +2328,15 @@
             </div>
             @endforeach
         </div>
+
+        <div class="card" x-show="aktif() && tampil($refs.rwlist) === 0" x-cloak style="text-align: center; padding: 48px 24px; color: var(--muted);">
+            <p style="font-size: 1rem;">Tidak ada kegiatan yang cocok dengan filter.</p>
+        </div>
         @endif
     </div>
     @endif
 
-        {{-- MODAL POPUP RINCIAN KEGIATAN --}}
+    {{-- MODAL POPUP RINCIAN KEGIATAN --}}
     <div
         class="modal-backdrop {{ $show_detail_modal ? 'open' : '' }}"
         x-data
@@ -1701,15 +2358,26 @@
                 {{-- Info ringkas: tanggal, waktu, tempat --}}
                 <div class="detail-info">
                     <div class="detail-info-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                            <line x1="16" y1="2" x2="16" y2="6" />
+                            <line x1="8" y1="2" x2="8" y2="6" />
+                            <line x1="3" y1="10" x2="21" y2="10" />
+                        </svg>
                         <span>{{ \Carbon\Carbon::parse($detail_kegiatan->tanggal, 'Asia/Jakarta')->translatedFormat('l, j F Y') }}</span>
                     </div>
                     <div class="detail-info-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                        </svg>
                         <span>{{ $detail_kegiatan->waktu_formatted }}</span>
                     </div>
                     <div class="detail-info-item detail-info-place">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                            <circle cx="12" cy="10" r="3" />
+                        </svg>
                         <span>{{ $detail_kegiatan->tempat }}</span>
                     </div>
                 </div>
@@ -1717,14 +2385,19 @@
                 {{-- Ditugaskan kepada (PIC) --}}
                 <section>
                     <h4 class="detail-section-title">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
                         Ditugaskan kepada
                     </h4>
                     @if($detail_kegiatan->pics->isNotEmpty())
                     <div class="detail-chips">
                         @foreach($detail_kegiatan->pics as $pic)
                         @php
-                            $picRole = $pic->role instanceof \BackedEnum ? $pic->role->value : (string) $pic->role;
+                        $picRole = $pic->role instanceof \BackedEnum ? $pic->role->value : (string) $pic->role;
                         @endphp
                         <span class="detail-chip">{{ $pic->name }} &middot; {{ ucfirst($picRole) }}</span>
                         @endforeach
@@ -1760,11 +2433,11 @@
                     <div class="detail-tugas-list">
                         @foreach($detail_kegiatan->tugas as $kegTugas)
                         @php
-                            $kegTugasStatusClass = match($kegTugas->status->value) {
-                                'selesai' => 'badge-status-selesai',
-                                'sedang_dikerjakan' => 'badge-status-sedang',
-                                default => 'badge-status-belum',
-                            };
+                        $kegTugasStatusClass = match($kegTugas->status->value) {
+                        'selesai' => 'badge-status-selesai',
+                        'sedang_dikerjakan' => 'badge-status-sedang',
+                        default => 'badge-status-belum',
+                        };
                         @endphp
                         <div class="detail-tugas-item">
                             <div class="detail-tugas-main">
@@ -1789,7 +2462,13 @@
             <div class="modal-footer detail-footer">
                 @if($isKabag)
                 <button type="button" class="detail-delete" wire:click="confirmDelete({{ $detail_kegiatan->id }})">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="3 6 5 6 21 6" />
+                        <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+                        <path d="M10 11v6" />
+                        <path d="M14 11v6" />
+                        <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
+                    </svg>
                     Hapus
                 </button>
                 @endif
@@ -1798,7 +2477,9 @@
                     <button type="button" class="btn btn-secondary" wire:click="closeDetailModal">Tutup</button>
                     @if($isKabag)
                     <button type="button" class="btn btn-secondary detail-edit" wire:click="openEditModal({{ $detail_kegiatan->id }})">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                        </svg>
                         Edit
                     </button>
                     @endif
@@ -2210,7 +2891,7 @@
     </div>
     @endif
 
-        {{-- MODAL POPUP PILIH EVENT GOOGLE CALENDAR (HANYA KABAG) --}}
+    {{-- MODAL POPUP PILIH EVENT GOOGLE CALENDAR (HANYA KABAG) --}}
     @if($isKabag)
     <div
         class="modal-backdrop {{ $show_gcal_picker ? 'open' : '' }}"
@@ -2221,7 +2902,12 @@
             <div class="modal-header gcal-header">
                 <div class="gcal-header-main">
                     <span class="gcal-header-icon" aria-hidden="true">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                            <line x1="16" y1="2" x2="16" y2="6" />
+                            <line x1="8" y1="2" x2="8" y2="6" />
+                            <line x1="3" y1="10" x2="21" y2="10" />
+                        </svg>
                     </span>
                     <div>
                         <h3 class="modal-title gcal-title">Pilih Event dari Google Calendar</h3>
@@ -2235,22 +2921,26 @@
 
             <div class="modal-body gcal-body">
                 <div class="gcal-info">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="16" x2="12" y2="12" />
+                        <line x1="12" y1="8" x2="12.01" y2="8" />
+                    </svg>
                     <span>Hanya event 6 bulan ke depan yang ditampilkan.</span>
                 </div>
 
                 @php
-                    $gcalTime = fn ($t) => str_replace(':', '.', (string) $t);
+                $gcalTime = fn ($t) => str_replace(':', '.', (string) $t);
                 @endphp
 
                 <div class="gcal-list">
                     @forelse($gcal_events as $idx => $event)
                     @php
-                        $isAlreadyAdded = in_array($event['id'], $importedGcalIds ?? [], true);
-                        $isSelected = $selected_gcal_index !== null && (string) $selected_gcal_index === (string) $idx;
-                        $waktuLabel = !empty($event['waktu_mulai'])
-                            ? $gcalTime($event['waktu_mulai']) . (!empty($event['waktu_selesai']) ? '–' . $gcalTime($event['waktu_selesai']) : '') . ' WIB'
-                            : 'Seharian';
+                    $isAlreadyAdded = in_array($event['id'], $importedGcalIds ?? [], true);
+                    $isSelected = $selected_gcal_index !== null && (string) $selected_gcal_index === (string) $idx;
+                    $waktuLabel = !empty($event['waktu_mulai'])
+                    ? $gcalTime($event['waktu_mulai']) . (!empty($event['waktu_selesai']) ? '–' . $gcalTime($event['waktu_selesai']) : '') . ' WIB'
+                    : 'Seharian';
                     @endphp
                     <label
                         wire:key="gcal-event-{{ $event['id'] }}"
@@ -2273,7 +2963,10 @@
 
                             <span class="gcal-option-meta">
                                 <span class="gcal-meta-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <circle cx="12" cy="12" r="10" />
+                                        <polyline points="12 6 12 12 16 14" />
+                                    </svg>
                                     {{ \Carbon\Carbon::parse($event['tanggal'], 'Asia/Jakarta')->translatedFormat('l, j M Y') }}
                                     <span class="gcal-sep">&bull;</span>
                                     {{ $waktuLabel }}
@@ -2281,7 +2974,10 @@
 
                                 @if(!empty($event['tempat']))
                                 <span class="gcal-meta-item gcal-meta-place">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                                        <circle cx="12" cy="10" r="3" />
+                                    </svg>
                                     {{ \Illuminate\Support\Str::limit($event['tempat'], 60) }}
                                 </span>
                                 @endif
@@ -2297,7 +2993,11 @@
             <div class="modal-footer gcal-footer">
                 @if(!empty($gcal_account_email ?? null))
                 <span class="gcal-account">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="23 4 23 10 17 10" />
+                        <polyline points="1 20 1 14 7 14" />
+                        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
+                    </svg>
                     Akun Google: <strong>{{ $gcal_account_email }}</strong>
                 </span>
                 @endif
@@ -2308,7 +3008,7 @@
                         type="button"
                         class="btn btn-primary"
                         wire:click="confirmGcalSelection"
-                        @if($selected_gcal_index === null || (isset($gcal_events[$selected_gcal_index]) && in_array($gcal_events[$selected_gcal_index]['id'], $importedGcalIds ?? [], true))) disabled @endif>
+                        @if($selected_gcal_index===null || (isset($gcal_events[$selected_gcal_index]) && in_array($gcal_events[$selected_gcal_index]['id'], $importedGcalIds ?? [], true))) disabled @endif>
                         OK
                     </button>
                 </div>
@@ -2316,5 +3016,5 @@
         </div>
     </div>
     @endif
-    
+
 </div>
