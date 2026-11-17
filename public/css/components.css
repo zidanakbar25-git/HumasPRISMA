@@ -880,3 +880,212 @@ body:has(.modal-backdrop.open) {
     .user-page .akun-card { margin-bottom: 28px; }
     .user-page .user-toolbar .btn { padding: 0 12px; }
 }
+
+/* Styling Kartu Tugas Horizontal (Memanjang) */
+.task-card-horizontal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 16px 22px;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+}
+
+.task-card-horizontal:hover {
+    border-color: var(--green-500);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.task-card-left {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+}
+
+.task-header-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.task-title-text {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 0;
+}
+
+.task-kegiatan-text {
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.task-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 0.8125rem;
+    color: var(--text);
+    font-weight: 500;
+    flex-wrap: wrap;
+}
+
+.task-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text);
+}
+
+.task-pic-text {
+    font-weight: 500;
+    color: var(--text);
+}
+
+.task-card-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+}
+
+.task-badges-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.task-action-btn-wrap {
+    display: flex;
+    align-items: center;
+}
+
+/* Tombol kecil bergaya pill seperti referensi */
+.task-detail-btn-custom {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background-color: var(--bg);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--text);
+    transition: background-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+
+.task-card-horizontal:hover .task-detail-btn-custom {
+    background-color: var(--green-50);
+    color: var(--green-800);
+    border-color: var(--green-200);
+}
+
+/* Responsif untuk Layar HP / Mobile (< 768px) */
+@media (max-width: 767px) {
+    .task-card-horizontal {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 14px;
+    }
+
+    .task-card-right {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        border-top: 1px dashed var(--border);
+        padding-top: 10px;
+    }
+
+    .task-badges-right {
+        justify-content: flex-start;
+    }
+
+    .task-action-btn-wrap {
+        width: 100%;
+    }
+
+    .task-detail-btn-custom {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Styling Bilah Pencarian & Filter Tugas */
+.task-filter-bar {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 24px;
+    background-color: var(--surface);
+    padding: 14px 18px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+}
+
+.filter-search-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.filter-search-icon {
+    position: absolute;
+    left: 14px;
+    color: var(--muted);
+    pointer-events: none;
+}
+
+.filter-search-wrap .filter-input {
+    padding-left: 40px;
+    height: 42px;
+    background-color: var(--bg);
+    border-color: var(--border);
+}
+
+.filter-dropdowns-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.filter-select {
+    height: 42px;
+    min-width: 160px;
+    background-color: var(--bg);
+    border-color: var(--border);
+    font-size: 0.875rem;
+    cursor: pointer;
+}
+
+/* Responsif untuk Mobile */
+@media (max-width: 767px) {
+    .task-filter-bar {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .filter-dropdowns-wrap {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .filter-select {
+        width: 100%;
+    }
+}

@@ -12,7 +12,11 @@
         <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
             <div style="max-width: 720px;">
                 <h3 style="font-size: 1.0625rem; font-weight: 700; color: var(--green-900); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <ellipse cx="12" cy="5" rx="9" ry="3" />
+                        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+                        <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3" />
+                    </svg>
                     <span>Salinan Cadangan Database</span>
                 </h3>
                 <p style="font-size: 0.875rem; color: var(--text); line-height: 1.6; margin: 0;">
@@ -21,18 +25,18 @@
             </div>
 
             <div>
-                <button 
-                    type="button" 
-                    wire:click="createBackup" 
-                    class="btn btn-primary" 
+                <button
+                    type="button"
+                    wire:click="createBackup"
+                    class="btn btn-primary"
                     wire:loading.attr="disabled"
-                    style="height: 44px; padding: 0 20px; font-weight: 600; font-size: 0.9375rem; display: flex; align-items: center; gap: 8px; white-space: nowrap;"
-                >
-                    <span wire:loading.remove style="display: flex; align-items: center; gap: 8px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-                        <span>Backup Database</span>
-                    </span>
-                    
+                    style="height: 44px; padding: 0 20px; font-weight: 600; font-size: 0.9375rem; display: inline-flex; align-items: center; justify-content: center; gap: 8px; white-space: nowrap; min-width: 175px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" x2="12" y1="15" y2="3" />
+                    </svg>
+                    <span>Backup Database</span>
                 </button>
             </div>
         </div>
@@ -50,80 +54,91 @@
         </div>
 
         @if($backups->isEmpty())
-            <div style="text-align: center; padding: 48px 20px; color: var(--muted);">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 12px; color: var(--border);"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg>
-                <p style="font-size: 0.9375rem; margin: 0;">Belum ada riwayat backup database.</p>
-                <p style="font-size: 0.8125rem; margin-top: 4px;">Klik tombol "Backup Database Sekarang" di atas untuk membuat cadangan data pertama.</p>
-            </div>
+        <div style="text-align: center; padding: 48px 20px; color: var(--muted);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 12px; color: var(--border);">
+                <ellipse cx="12" cy="5" rx="9" ry="3" />
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+                <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3" />
+            </svg>
+            <p style="font-size: 0.9375rem; margin: 0;">Belum ada riwayat backup database.</p>
+            <p style="font-size: 0.8125rem; margin-top: 4px;">Klik tombol "Backup Database Sekarang" di atas untuk membuat cadangan data pertama.</p>
+        </div>
         @else
-            <div style="overflow-x: auto;">
-                <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.875rem;">
-                    <thead>
-                        <tr style="background-color: var(--green-50); border-bottom: 2px solid var(--border);">
-                            <th style="padding: 12px 14px; font-weight: 700; color: var(--green-900); width: 50px; text-align: center;">No</th>
-                            <th style="padding: 12px 14px; font-weight: 700; color: var(--green-900);">Tanggal & Waktu</th>
-                            <th style="padding: 12px 14px; font-weight: 700; color: var(--green-900);">Nama File</th>
-                            <th style="padding: 12px 14px; font-weight: 700; color: var(--green-900);">Ukuran</th>
-                            <th style="padding: 12px 14px; font-weight: 700; color: var(--green-900); text-align: center; width: 120px;">Download</th>
-                            <th style="padding: 12px 14px; font-weight: 700; color: var(--green-900); text-align: center; width: 100px;">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($backups as $index => $b)
-                            <tr style="border-bottom: 1px solid var(--border); transition: background-color var(--t-fast) var(--ease);" onmouseover="this.style.backgroundColor='var(--green-50)'" onmouseout="this.style.backgroundColor='transparent'">
-                                <td style="padding: 14px; text-align: center; color: var(--muted); font-weight: 600;">
-                                    {{ $index + 1 }}
-                                </td>
-                                <td style="padding: 14px; color: var(--text); font-weight: 600;">
-                                    {{ $b->tanggal_formatted }}
-                                </td>
-                                <td style="padding: 14px; color: var(--text);">
-                                    <div style="display: flex; align-items: center; gap: 8px;">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-                                        <code style="font-family: monospace; font-size: 0.8125rem; background-color: var(--green-50); padding: 2px 6px; border-radius: 4px; color: var(--green-900);">
-                                            {{ $b->nama_file }}
-                                        </code>
-                                    </div>
-                                </td>
-                                <td style="padding: 14px; color: var(--muted); font-weight: 500;">
-                                    {{ $b->ukuran_formatted }}
-                                </td>
-                                <td style="padding: 14px; text-align: center;">
-                                    <a 
-                                        href="{{ route('kabag.backup-db.download', $b->id) }}" 
-                                        class="btn btn-secondary" 
-                                        style="height: 32px; padding: 0 12px; font-size: 0.8125rem; display: inline-flex; align-items: center; gap: 6px; text-decoration: none;"
-                                        title="Unduh Berkas SQL"
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-                                        <span>Unduh</span>
-                                    </a>
-                                </td>
-                                <td style="padding: 14px; text-align: center;">
-                                    <button 
-                                        type="button" 
-                                        wire:click="confirmDelete({{ $b->id }})" 
-                                        class="btn btn-danger" 
-                                        style="height: 32px; padding: 0 12px; font-size: 0.8125rem;"
-                                    >
-                                        Hapus
-                                    </button>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.875rem;">
+                <thead>
+                    <tr style="background-color: var(--green-50); border-bottom: 2px solid var(--border);">
+                        <th style="padding: 12px 14px; font-weight: 700; color: var(--green-900); width: 50px; text-align: center;">No</th>
+                        <th style="padding: 12px 14px; font-weight: 700; color: var(--green-900);">Tanggal & Waktu</th>
+                        <th style="padding: 12px 14px; font-weight: 700; color: var(--green-900);">Nama File</th>
+                        <th style="padding: 12px 14px; font-weight: 700; color: var(--green-900);">Ukuran</th>
+                        <th style="padding: 12px 14px; font-weight: 700; color: var(--green-900); text-align: center; width: 120px;">Download</th>
+                        <th style="padding: 12px 14px; font-weight: 700; color: var(--green-900); text-align: center; width: 100px;">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($backups as $index => $b)
+                    <tr style="border-bottom: 1px solid var(--border); transition: background-color var(--t-fast) var(--ease);" onmouseover="this.style.backgroundColor='var(--green-50)'" onmouseout="this.style.backgroundColor='transparent'">
+                        <td style="padding: 14px; text-align: center; color: var(--muted); font-weight: 600;">
+                            {{ $index + 1 }}
+                        </td>
+                        <td style="padding: 14px; color: var(--text); font-weight: 600;">
+                            {{ $b->tanggal_formatted }}
+                        </td>
+                        <td style="padding: 14px; color: var(--text);">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                    <polyline points="14 2 14 8 20 8" />
+                                    <line x1="16" y1="13" x2="8" y2="13" />
+                                    <line x1="16" y1="17" x2="8" y2="17" />
+                                    <polyline points="10 9 9 9 8 9" />
+                                </svg>
+                                <code style="font-family: monospace; font-size: 0.8125rem; background-color: var(--green-50); padding: 2px 6px; border-radius: 4px; color: var(--green-900);">
+                                    {{ $b->nama_file }}
+                                </code>
+                            </div>
+                        </td>
+                        <td style="padding: 14px; color: var(--muted); font-weight: 500;">
+                            {{ $b->ukuran_formatted }}
+                        </td>
+                        <td style="padding: 14px; text-align: center;">
+                            <a
+                                href="{{ route('kabag.backup-db.download', $b->id) }}"
+                                class="btn btn-secondary"
+                                style="height: 32px; padding: 0 12px; font-size: 0.8125rem; display: inline-flex; align-items: center; gap: 6px; text-decoration: none;"
+                                title="Unduh Berkas SQL">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                    <polyline points="7 10 12 15 17 10" />
+                                    <line x1="12" x2="12" y1="15" y2="3" />
+                                </svg>
+                                <span>Unduh</span>
+                            </a>
+                        </td>
+                        <td style="padding: 14px; text-align: center;">
+                            <button
+                                type="button"
+                                wire:click="confirmDelete({{ $b->id }})"
+                                class="btn btn-danger"
+                                style="height: 32px; padding: 0 12px; font-size: 0.8125rem;">
+                                Hapus
+                            </button>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
         @endif
     </div>
 
     {{-- MODAL KONFIRMASI HAPUS --}}
-    <div 
-        class="modal-backdrop {{ $show_delete_modal ? 'open' : '' }}" 
-        x-data 
+    <div
+        class="modal-backdrop {{ $show_delete_modal ? 'open' : '' }}"
+        x-data
         @keydown.escape.window="$wire.closeDeleteModal()"
-        @if(!$show_delete_modal) style="display: none;" @endif
-    >
+        @if(!$show_delete_modal) style="display: none;" @endif>
         <div class="modal-box" style="max-width: 460px;">
             <div class="modal-header">
                 <h3 class="modal-title" style="color: var(--danger);">Hapus File Backup</h3>
@@ -145,12 +160,11 @@
                 <button type="button" class="btn btn-secondary" wire:click="closeDeleteModal">
                     Batal
                 </button>
-                <button 
-                    type="button" 
-                    class="btn btn-danger" 
+                <button
+                    type="button"
+                    class="btn btn-danger"
                     wire:click="deleteBackup"
-                    wire:loading.attr="disabled"
-                >
+                    wire:loading.attr="disabled">
                     <span wire:loading.remove>Ya, Hapus File</span>
                     <span wire:loading>Menghapus...</span>
                 </button>

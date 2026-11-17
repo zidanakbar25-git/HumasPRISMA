@@ -36,6 +36,11 @@ class TugasIndex extends Component
     // Intern: 'tugas_saya', 'revisi', 'riwayat'
     public string $active_tab = 'daftar_tugas';
 
+    // Variabel Filter & Pencarian
+    public string $search = '';
+    public string $filter_prioritas = '';
+    public string $filter_status = '';
+
     // Modal Popup Rincian Tugas
     public bool $show_detail_modal = false;
     public ?int $detail_tugas_id = null;
@@ -940,10 +945,29 @@ class TugasIndex extends Component
     {
         $isKabag = $this->user_role === Role::Kabag->value;
 
+        // Tentukan apakah tab aktif adalah tab "selesai"
+        $isTabSelesai = $this->active_tab === 'selesai';
+
+        // Jika tab selesai, abaikan filter status & prioritas (hanya pakai search judul)
+        $searchQuery = trim($this->search);
+        $prioritasQuery = $isTabSelesai ? '' : $this->filter_prioritas;
+        $statusQuery = $isTabSelesai ? '' : $this->filter_status;
+
         if ($isKabag) {
-            $tugasList = $service->getTugasForKabag($this->active_tab);
+            $tugasList = $service->getTugasForKabag(
+                tab: $this->active_tab, 
+                search: $searchQuery, 
+                prioritas: $prioritasQuery, 
+                status: $statusQuery
+            );
         } else {
-            $tugasList = $service->getTugasForUser($this->user_id, $this->active_tab);
+            $tugasList = $service->getTugasForUser(
+                userId: $this->user_id, 
+                tab: $this->active_tab, 
+                search: $searchQuery, 
+                prioritas: $prioritasQuery, 
+                status: $statusQuery
+            );
         }
 
         $availablePics = $isKabag ? $service->getAvailablePics() : collect();
@@ -963,5 +987,10 @@ class TugasIndex extends Component
             'availableStaff' => $availableStaff,
             'pilihanTujuan' => $pilihanTujuan,
         ]);
+    }
+
+    public function updatedActiveTab(): void
+    {
+        $this->reset(['search', 'filter_prioritas', 'filter_status']);
     }
 }

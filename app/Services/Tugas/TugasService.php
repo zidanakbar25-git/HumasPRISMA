@@ -22,14 +22,14 @@ class TugasService implements TugasServiceInterface
         protected TugasRepositoryInterface $tugasRepo
     ) {}
 
-    public function getTugasForKabag(string $tab = 'daftar_tugas'): Collection
+    public function getTugasForKabag(string $tab = 'daftar_tugas', string $search = '', string $prioritas = '', string $status = ''): Collection
     {
-        return $this->tugasRepo->getForKabag($tab);
+        return $this->tugasRepo->getForKabag($tab, $search, $prioritas, $status);
     }
 
-    public function getTugasForUser(int $userId, string $tab = 'tugas_saya'): Collection
+    public function getTugasForUser(int $userId, string $tab = 'tugas_saya', string $search = '', string $prioritas = '', string $status = ''): Collection
     {
-        return $this->tugasRepo->getForUser($userId, $tab);
+        return $this->tugasRepo->getForUser($userId, $tab, $search, $prioritas, $status);
     }
 
     public function getTugasDetailAndMarkAsSeen(int $tugasId, int $userId): Tugas

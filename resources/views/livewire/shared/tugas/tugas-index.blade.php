@@ -12,51 +12,60 @@
                 <button type="button" 
                         class="tab-item {{ $active_tab === 'daftar_tugas' ? 'active' : '' }}" 
                         wire:click="setTab('daftar_tugas')">
-                    Daftar Tugas
+                    <x-icon name="tugas" :size="16" />
+                    <span>Daftar Tugas</span>
                 </button>
                 <button type="button" 
                         class="tab-item {{ $active_tab === 'selesai' ? 'active' : '' }}" 
                         wire:click="setTab('selesai')">
-                    Selesai
+                    <x-icon name="clock" :size="16" />
+                    <span>Selesai</span>
                 </button>
                 <button type="button" 
                         class="tab-item {{ $active_tab === 'riwayat' ? 'active' : '' }}" 
                         wire:click="setTab('riwayat')">
-                    Riwayat
+                    <x-icon name="clock" :size="16" />
+                    <span>Riwayat</span>
                 </button>
             @elseif($user_role === 'intern')
                 {{-- Tabs Intern --}}
                 <button type="button" 
                         class="tab-item {{ $active_tab === 'tugas_saya' ? 'active' : '' }}" 
                         wire:click="setTab('tugas_saya')">
-                    Tugas Saya
+                    <x-icon name="tugas" :size="16" />
+                    <span>Tugas Saya</span>
                 </button>
                 <button type="button" 
                         class="tab-item {{ $active_tab === 'revisi' ? 'active' : '' }}" 
                         wire:click="setTab('revisi')">
-                    Revisi
+                    <x-icon name="edit" :size="16" />
+                    <span>Revisi</span>
                 </button>
                 <button type="button" 
                         class="tab-item {{ $active_tab === 'riwayat' ? 'active' : '' }}" 
                         wire:click="setTab('riwayat')">
-                    Riwayat
+                    <x-icon name="clock" :size="16" />
+                    <span>Riwayat</span>
                 </button>
             @else
                 {{-- Tabs Staff --}}
                 <button type="button" 
                         class="tab-item {{ $active_tab === 'tugas_saya' ? 'active' : '' }}" 
                         wire:click="setTab('tugas_saya')">
-                    Tugas Saya
+                    <x-icon name="tugas" :size="16" />
+                    <span>Tugas Saya</span>
                 </button>
                 <button type="button" 
                         class="tab-item {{ $active_tab === 'pengumpulan_intern' ? 'active' : '' }}" 
                         wire:click="setTab('pengumpulan_intern')">
-                    Pengumpulan Intern
+                    <x-icon name="upload" :size="16" />
+                    <span>Pengumpulan Intern</span>
                 </button>
                 <button type="button" 
                         class="tab-item {{ $active_tab === 'riwayat' ? 'active' : '' }}" 
                         wire:click="setTab('riwayat')">
-                    Riwayat
+                    <x-icon name="clock" :size="16" />
+                    <span>Riwayat</span>
                 </button>
             @endif
         </div>
@@ -70,6 +79,39 @@
                 </button>
             </div>
         @endif
+    </div>
+
+    {{-- BILAH PENCARIAN & FILTER (Seragam untuk semua tab tugas) --}}
+    <div class="task-filter-bar">
+        <div class="filter-search-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="filter-search-icon">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input type="text" 
+                   wire:model.live.debounce.300ms="search" 
+                   class="form-control filter-input" 
+                   placeholder="Cari tugas, PIC, atau kegiatan..."
+                   autocomplete="off">
+        </div>
+
+        <div class="filter-dropdowns-wrap">
+            {{-- Filter Prioritas --}}
+            <select wire:model.live="filter_prioritas" class="form-control filter-select">
+                <option value="">Semua Prioritas</option>
+                <option value="rendah">Rendah</option>
+                <option value="sedang">Sedang</option>
+                <option value="tinggi">Tinggi</option>
+            </select>
+
+            {{-- Filter Status (Disesuaikan per tab di sisi backend) --}}
+            <select wire:model.live="filter_status" class="form-control filter-select">
+                <option value="">Semua Status</option>
+                <option value="belum_dikerjakan">Belum Dikerjakan</option>
+                <option value="sedang_dikerjakan">Sedang Dikerjakan</option>
+                <option value="selesai">Selesai</option>
+            </select>
+        </div>
     </div>
 
     {{-- Kontainer Daftar Kartu Tugas --}}
@@ -96,7 +138,8 @@
                 </p>
             </div>
         @else
-            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px;">
+            {{-- Ubah dari grid menjadi flex vertikal 1 kolom ke bawah --}}
+            <div style="display: flex; flex-direction: column; gap: 12px;">
                 @foreach($tugasList as $t)
                     @php
                         // Tentukan aksi klik kartu berdasarkan tab & role
@@ -110,14 +153,44 @@
                     @endphp
 
                     <div wire:key="tugas-card-{{ $t->id }}" 
-                         class="card card-clickable" 
-                         wire:click="{{ $clickAction }}"
-                         style="display: flex; flex-direction: column; justify-content: space-between; gap: 14px; position: relative;">
+                         class="card card-clickable task-card-horizontal" 
+                         wire:click="{{ $clickAction }}">
                         
-                        {{-- Baris Badge Atas --}}
-                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;">
-                            <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
-                                {{-- Badge Baru (Staff/Intern atau Kabag di tab Selesai) --}}
+                        {{-- Sisi Kiri: Judul, Kegiatan, Deadline, & PIC --}}
+                        <div class="task-card-left">
+                            <div class="task-header-row">
+                                {{-- Judul Tugas --}}
+                                <h3 class="task-title-text">{{ $t->judul }}</h3>
+
+                                {{-- Badge Kegiatan Terkait --}}
+                                @if($t->kegiatan)
+                                    <span class="badge badge-kegiatan" title="Kegiatan: {{ $t->kegiatan->judul }}">
+                                        <x-icon name="calendar" :size="12" />
+                                        <span class="task-kegiatan-text">{{ $t->kegiatan->judul }}</span>
+                                    </span>
+                                @endif
+                            </div>
+
+                            {{-- Informasi Bawah (Deadline & PIC) --}}
+                            <div class="task-meta-row">
+                                <div class="task-meta-item">
+                                    <x-icon name="clock" :size="14" />
+                                    <span>Tenggat: {{ $t->deadline_formatted }}</span>
+                                </div>
+
+                                @if($isKabag || $active_tab === 'pengumpulan_intern')
+                                    <div class="task-meta-item task-pic-text">
+                                        <x-icon name="user" :size="14" />
+                                        <span>{{ $t->pic?->name ?? '-' }}</span>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+
+                        {{-- Sisi Kanan: Badge Status, Prioritas, & Tombol Aksi Sesuai Referensi --}}
+                        <div class="task-card-right">
+                            <div class="task-badges-right">
+                                {{-- Badge Baru --}}
                                 @if($t->isBaruUntuk($user_id))
                                     <span class="badge badge-baru">Baru</span>
                                 @endif
@@ -138,81 +211,43 @@
                                     <span class="badge badge-di-staff">Di staff: {{ $t->staffPenerima?->name ?? 'Staff' }}</span>
                                 @endif
 
+                                {{-- Badge Status --}}
+                                @php
+                                    $statusClass = match($t->status->value) {
+                                        'selesai' => 'badge-status-selesai',
+                                        'sedang_dikerjakan' => 'badge-status-sedang',
+                                        default => 'badge-status-belum',
+                                    };
+                                @endphp
+                                <span class="badge {{ $statusClass }}">
+                                    {{ $t->status->label() }}
+                                </span>
+
                                 {{-- Badge Prioritas --}}
                                 <span class="badge badge-prioritas-{{ $t->prioritas->value }}">
                                     {{ $t->prioritas->label() }}
                                 </span>
                             </div>
 
-                            {{-- Badge Status --}}
-                            @php
-                                $statusClass = match($t->status->value) {
-                                    'selesai' => 'badge-status-selesai',
-                                    'sedang_dikerjakan' => 'badge-status-sedang',
-                                    default => 'badge-status-belum',
-                                };
-                            @endphp
-                            <span class="badge {{ $statusClass }}">
-                                {{ $t->status->label() }}
-                            </span>
-                        </div>
-
-                        {{-- Judul Tugas --}}
-                        <div>
-                            <h3 style="font-size: 1.0625rem; font-weight: 600; color: var(--text); line-height: 1.4; margin-bottom: 6px;">
-                                {{ $t->judul }}
-                            </h3>
-
-                            {{-- Badge Kegiatan Terkait --}}
-                            @if($t->kegiatan)
-                                <div style="margin-top: 6px;">
-                                    <span class="badge badge-kegiatan" title="Kegiatan: {{ $t->kegiatan->judul }}">
-                                        <x-icon name="calendar" :size="12" />
-                                        <span style="max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                                            {{ $t->kegiatan->judul }}
-                                        </span>
-                                    </span>
-                                </div>
-                            @endif
-
-                            {{-- Petunjuk Klik Khusus Sesuai Tab --}}
-                            @if($active_tab === 'riwayat')
-                                <div style="margin-top: 10px; display: flex; align-items: center; gap: 6px; font-size: 0.8125rem; color: var(--muted); font-weight: 500;">
-                                    <x-icon name="eye" :size="14" />
-                                    <span>Lihat riwayat (read-only)</span>
-                                </div>
-                            @elseif($isKabag && $active_tab === 'selesai')
-                                <div style="margin-top: 10px; display: flex; align-items: center; gap: 6px; font-size: 0.8125rem; color: var(--green-700); font-weight: 500;">
-                                    <x-icon name="eye" :size="14" />
-                                    <span>Lihat pengumpulan</span>
-                                </div>
-                            @elseif(! $isKabag && $user_role === 'staff' && $active_tab === 'pengumpulan_intern')
-                                <div style="margin-top: 10px; display: flex; align-items: center; gap: 6px; font-size: 0.8125rem; color: var(--green-700); font-weight: 500;">
-                                    <x-icon name="edit" :size="14" />
-                                    <span>Review pengumpulan</span>
-                                </div>
-                            @elseif(! $isKabag && $t->tahap->value === 'revisi')
-                                <div style="margin-top: 10px; display: flex; align-items: center; gap: 6px; font-size: 0.8125rem; color: var(--warning); font-weight: 500;">
-                                    <x-icon name="edit" :size="14" />
-                                    <span>Perbaiki pengumpulan</span>
-                                </div>
-                            @endif
-                        </div>
-
-                        {{-- Info Bawah: Deadline & PIC --}}
-                        <div style="border-top: 1px solid var(--border); padding-top: 10px; display: flex; align-items: center; justify-content: space-between; font-size: 0.8125rem; color: var(--muted); gap: 8px;">
-                            <div style="display: flex; align-items: center; gap: 6px;">
-                                <x-icon name="clock" :size="14" />
-                                <span>{{ $t->deadline_formatted }}</span>
+                            {{-- Tombol Detail / Aksi seperti di Referensi --}}
+                            <div class="task-action-btn-wrap">
+                                <span class="task-detail-btn-custom">
+                                    @if($active_tab === 'riwayat')
+                                        Lihat Riwayat
+                                    @elseif($isKabag && $active_tab === 'selesai')
+                                        Lihat Pengumpulan
+                                    @elseif(! $isKabag && $user_role === 'staff' && $active_tab === 'pengumpulan_intern')
+                                        Review
+                                    @elseif(! $isKabag && $t->tahap->value === 'revisi')
+                                        Perbaiki
+                                    @else
+                                        Detail Tugas
+                                    @endif
+                                    <x-icon name="chevron-right" :size="14" />
+                                </span>
                             </div>
-
-                            @if($isKabag || $active_tab === 'pengumpulan_intern')
-                                <div style="display: flex; align-items: center; gap: 6px; font-weight: 500; color: var(--text);">
-                                    <x-icon name="user" :size="14" />
-                                    <span>{{ $t->pic?->name ?? '-' }}</span>
-                                </div>
-                            @endif
                         </div>
+
                     </div>
                 @endforeach
             </div>
