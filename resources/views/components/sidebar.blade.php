@@ -8,8 +8,10 @@
 <aside id="main-sidebar" class="sidebar">
     <div class="sidebar-header">
         <a href="{{ url('/') }}" class="sidebar-brand" wire:navigate>
-            <x-icon name="briefcase" :size="22" />
-            <span>Biro Humas</span>
+            <div style="width: 36px; height: 36px; background-color: #556B2F; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0;">
+                <img src="{{ asset('images/logo.webp') }}" alt="Logo Biro Humas" style="width: 22px; height: 22px; object-fit: contain;">
+            </div>
+            <span>PRISMA</span>
         </a>
     </div>
 

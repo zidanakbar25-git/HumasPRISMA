@@ -19,6 +19,7 @@ class GoogleCalendarController extends Controller
     public function redirect(): RedirectResponse|\Symfony\Component\HttpFoundation\Response
     {
         return Socialite::driver('google')
+            ->stateless()
             ->scopes(['https://www.googleapis.com/auth/calendar.readonly'])
             ->with(['prompt' => 'select_account', 'access_type' => 'online'])
             ->redirect();
@@ -38,7 +39,7 @@ class GoogleCalendarController extends Controller
 
         try {
             /** @var \Laravel\Socialite\Two\User $googleUser */
-            $googleUser = Socialite::driver('google')->user();
+            $googleUser = Socialite::driver('google')->stateless()->user();
             $accessToken = $googleUser->token;
         } catch (\Throwable $e) {
             Log::error('Google OAuth callback error', ['message' => $e->getMessage()]);

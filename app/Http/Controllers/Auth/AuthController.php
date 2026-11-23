@@ -68,6 +68,11 @@ class AuthController extends Controller
             $request->session()->regenerate();
             RateLimiter::clear($throttleKey);
 
+            $intended = session()->get('url.intended');
+            if ($intended && str_contains($intended, 'google-calendar/callback')) {
+                session()->forget('url.intended');
+            }
+
             return $this->redirectBasedOnRole($user->role);
         }
 

@@ -29,10 +29,10 @@
             }
         }
 
-        /* Sisi Kiri (Background Kampus dengan Overlay Senada Warna Tombol/Tema) */
+        /* Sisi Kiri (Background Kampus dengan Overlay Nuansa Hijau) */
         .login-brand-side {
             position: relative;
-            background-image: url('{{ asset("images/Kampus-Unjani-3.jpg") }}');
+            background-image: url('{{ asset("images/gedung-rektorat.png") }}');
             background-size: cover;
             background-position: center;
             padding: 48px;
@@ -42,12 +42,12 @@
             color: #ffffff;
         }
 
-        /* Overlay Gradasi disamakan dengan nuansa hijau tema tombol (menggunakan variabel --green-800 / --green-900) */
+        /* Overlay Gradasi disamakan dengan nuansa hijau tema tombol */
         .login-brand-side::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(35, 73, 54, 0.88) 0%, rgba(25, 54, 39, 0.92) 100%);
+            background: linear-gradient(135deg, rgba(85, 93, 59, 0.88) 0%, rgba(65, 72, 45, 0.92) 100%);
             z-index: 1;
         }
 
@@ -65,27 +65,14 @@
         .brand-top {
             display: flex;
             align-items: center;
-            gap: 12px;
         }
 
-        .brand-logo-box {
-            width: 44px;
-            height: 44px;
-            background-color: rgba(255, 255, 255, 0.15);
-            border-radius: 10px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(4px);
-        }
-
-        .brand-app-name {
-            font-size: 1.125rem;
-            font-weight: 700;
-            letter-spacing: -0.01em;
-            color: #ffffff;
+        /* Kotak background dan border dihilangkan, ukuran diperbesar sedikit */
+        .brand-logo-img {
+            width: 56px;
+            height: 56px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
         }
 
         .brand-content {
@@ -182,33 +169,19 @@
             cursor: pointer;
             user-select: none;
         }
-
-        .login-info-box {
-            margin-top: 24px;
-            padding: 12px 16px;
-            background-color: var(--background);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            font-size: 0.775rem;
-            color: var(--muted);
-            line-height: 1.4;
-        }
     </style>
 </head>
 <body>
     <div class="login-layout">
-        <!-- Sisi Kiri: Gambar Kampus dengan Nuansa Hijau yang Disamakan -->
+        <!-- Sisi Kiri -->
         <div class="login-brand-side">
             <div class="brand-top">
-                <div class="brand-logo-box">
-                    <x-icon name="briefcase" :size="24" />
-                </div>
-                <span class="brand-app-name">PRISMA Humas</span>
+                <img src="{{ asset('images/logo.webp') }}" alt="Logo Biro Humas" class="brand-logo-img">
             </div>
             
             <div class="brand-content">
-                <h1 class="brand-heading">Sistem Manajemen Tugas &amp; Jadwal Kegiatan Kantor</h1>
-                <p class="brand-description">Satu portal terpadu untuk pengelolaan penugasan staf, pemantauan progres pekerjaan, dan koordinasi biro secara transparan.</p>
+                <h1 class="brand-heading">PRISMA</h1>
+                <p class="brand-description">"Public Relations Information Scheduling and Management Application"</p>
             </div>
 
             <div style="font-size: 0.8rem; color: rgba(255, 255, 255, 0.7);">
@@ -285,10 +258,6 @@
                         Masuk
                     </button>
                 </form>
-
-                <div class="login-info-box">
-                    Pembuatan akun baru dikelola langsung di dalam sistem oleh Kabag atau Staff yang berwenang.
-                </div>
             </div>
         </div>
     </div>

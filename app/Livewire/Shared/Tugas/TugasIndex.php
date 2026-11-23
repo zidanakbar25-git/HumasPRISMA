@@ -314,7 +314,7 @@ class TugasIndex extends Component
     public function switchHasilModeRevisi(bool $isRevisi): void
     {
         $this->hasil_mode_revisi = $isRevisi;
-        if ($isRevisi && empty(array_filter($this->hasil_poin_revisi, fn ($p) => trim((string) $p) !== ''))) {
+        if ($isRevisi && empty(array_filter($this->hasil_poin_revisi, fn($p) => trim((string) $p) !== ''))) {
             $this->hasil_poin_revisi = [''];
         }
         $this->resetErrorBag();
@@ -343,7 +343,7 @@ class TugasIndex extends Component
 
         $poinBersih = array_values(array_filter(
             array_map('trim', $this->hasil_poin_revisi),
-            fn ($p) => $p !== ''
+            fn($p) => $p !== ''
         ));
 
         if (empty($poinBersih)) {
@@ -436,7 +436,7 @@ class TugasIndex extends Component
     public function switchModeRevisi(bool $isRevisi): void
     {
         $this->review_mode_revisi = $isRevisi;
-        if ($isRevisi && empty(array_filter($this->poin_revisi, fn ($p) => trim((string) $p) !== ''))) {
+        if ($isRevisi && empty(array_filter($this->poin_revisi, fn($p) => trim((string) $p) !== ''))) {
             $this->poin_revisi = [''];
         }
         $this->resetErrorBag();
@@ -479,7 +479,7 @@ class TugasIndex extends Component
 
         $poinBersih = array_values(array_filter(
             array_map('trim', $this->poin_revisi),
-            fn ($p) => $p !== ''
+            fn($p) => $p !== ''
         ));
 
         if (empty($poinBersih)) {
@@ -758,29 +758,21 @@ class TugasIndex extends Component
     /**
      * Buka Lightbox Penampil Gambar Layar Penuh.
      */
-    public function openLightbox(int $initialFileId): void
+    public function openLightbox(int $fileId): void
     {
-        $target = $this->hasil_tugas ?? $this->review_tugas ?? $this->revisi_tugas;
-        if (! $target || ! $target->pengumpulan) {
-            return;
-        }
+        $file = \App\Models\Tugas\PengumpulanFile::with('pengumpulan.tugas')->findOrFail($fileId);
 
-        $this->lightbox_images = [];
-        $currentIndex = 0;
+        \Illuminate\Support\Facades\Gate::authorize('viewPengumpulan', $file->pengumpulan->tugas);
 
-        foreach ($target->pengumpulan->files as $idx => $f) {
-            $this->lightbox_images[] = [
-                'id' => $f->id,
-                'nama_asli' => $f->nama_asli,
-                'url' => route('pengumpulan.file.view', ['id' => $f->id]),
-            ];
+        $files = $file->pengumpulan->files()->orderBy('id')->get();
 
-            if ($f->id === $initialFileId) {
-                $currentIndex = $idx;
-            }
-        }
+        $this->lightbox_images = $files->map(fn($f) => [
+            'id' => $f->id,
+            'url' => route('pengumpulan.file.view', ['id' => $f->id]),
+            'nama_asli' => $f->nama_asli,
+        ])->values()->all();
 
-        $this->lightbox_current_index = $currentIndex;
+        $this->lightbox_current_index = max(0, (int) $files->search(fn($f) => $f->id === $fileId));
         $this->show_lightbox = true;
     }
 
@@ -955,17 +947,17 @@ class TugasIndex extends Component
 
         if ($isKabag) {
             $tugasList = $service->getTugasForKabag(
-                tab: $this->active_tab, 
-                search: $searchQuery, 
-                prioritas: $prioritasQuery, 
+                tab: $this->active_tab,
+                search: $searchQuery,
+                prioritas: $prioritasQuery,
                 status: $statusQuery
             );
         } else {
             $tugasList = $service->getTugasForUser(
-                userId: $this->user_id, 
-                tab: $this->active_tab, 
-                search: $searchQuery, 
-                prioritas: $prioritasQuery, 
+                userId: $this->user_id,
+                tab: $this->active_tab,
+                search: $searchQuery,
+                prioritas: $prioritasQuery,
                 status: $statusQuery
             );
         }

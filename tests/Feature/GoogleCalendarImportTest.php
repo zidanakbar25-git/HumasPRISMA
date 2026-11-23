@@ -162,6 +162,7 @@ class GoogleCalendarImportTest extends TestCase
         $socialiteUser->token = 'mock-access-token';
 
         $provider = Mockery::mock(GoogleProvider::class);
+        $provider->shouldReceive('stateless')->andReturnSelf();
         $provider->shouldReceive('user')->once()->andReturn($socialiteUser);
 
         Socialite::shouldReceive('driver')->with('google')->andReturn($provider);
@@ -190,6 +191,7 @@ class GoogleCalendarImportTest extends TestCase
         $socialiteUser->token = 'mock-access-token';
 
         $provider = Mockery::mock(GoogleProvider::class);
+        $provider->shouldReceive('stateless')->andReturnSelf();
         $provider->shouldReceive('user')->once()->andReturn($socialiteUser);
 
         Socialite::shouldReceive('driver')->with('google')->andReturn($provider);
