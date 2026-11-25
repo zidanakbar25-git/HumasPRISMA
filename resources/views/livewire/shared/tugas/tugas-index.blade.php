@@ -1417,9 +1417,7 @@
                                 </button>
                                 <button type="button" 
                                         class="btn btn-primary" 
-                                        wire:click="terimaTugasAction"
-                                        wire:loading.attr="disabled"
-                                        wire:confirm="Terima hasil pengumpulan tugas ini dan pindahkan ke Riwayat?">
+                                        wire:click="openTerimaTugasConfirm">
                                     <x-icon name="check" :size="15" />
                                     <span>Terima Tugas</span>
                                 </button>
@@ -1570,4 +1568,33 @@
             </div>
         </div>
     @endif
+
+    {{-- Modal Konfirmasi Terima Tugas --}}
+    @if($show_terima_confirm_modal)
+        <div class="modal-backdrop open" wire:click.self="closeTerimaTugasConfirm">
+            <div class="modal-box" style="max-width: 400px;">
+                <div class="modal-header">
+                    <h3 class="modal-title">Terima Tugas</h3>
+                    <button type="button" class="modal-close" wire:click="closeTerimaTugasConfirm">
+                        <x-icon name="x" :size="20" />
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p style="font-size: 0.9375rem; color: var(--text); margin: 0;">
+                        Terima hasil pengumpulan ini dan pindahkan tugas ke Riwayat?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" wire:click="closeTerimaTugasConfirm">
+                        Batal
+                    </button>
+                    <button type="button" class="btn btn-primary" wire:click="terimaTugasAction" wire:loading.attr="disabled">
+                        <span wire:loading.remove wire:target="terimaTugasAction">Ya, Terima</span>
+                        <span wire:loading wire:target="terimaTugasAction">Memproses...</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    @endif
+
 </div>

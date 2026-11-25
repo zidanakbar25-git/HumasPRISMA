@@ -147,28 +147,6 @@
         .password-toggle:hover {
             color: var(--text);
         }
-
-        .login-checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 22px;
-            cursor: pointer;
-        }
-
-        .login-checkbox-group input {
-            accent-color: var(--green-700);
-            width: 16px;
-            height: 16px;
-            cursor: pointer;
-        }
-
-        .login-checkbox-label {
-            font-size: 0.875rem;
-            color: var(--text);
-            cursor: pointer;
-            user-select: none;
-        }
     </style>
 </head>
 <body>
@@ -249,12 +227,7 @@
                         @enderror
                     </div>
 
-                    <label class="login-checkbox-group">
-                        <input type="checkbox" name="remember" value="1">
-                        <span class="login-checkbox-label">Ingat sesi saya</span>
-                    </label>
-
-                    <button type="submit" class="btn btn-primary btn-block" style="height: 44px; font-weight: 600;">
+                    <button type="submit" class="btn btn-primary btn-block" style="height: 44px; font-weight: 600; margin-top: 24px;">
                         Masuk
                     </button>
                 </form>

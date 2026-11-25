@@ -6,9 +6,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Enums\Role;
 use App\Http\Controllers\Controller;
+use App\Models\ManajemenUser\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -19,17 +21,14 @@ class AuthController extends Controller
     /**
      * Tampilkan formulir login.
      */
-    public function showLoginForm(): View|RedirectResponse
+    public function showLoginForm(): View
     {
-        if (Auth::check()) {
-            return $this->redirectBasedOnRole(Auth::user()->role);
-        }
-
         return view('Auth.login');
     }
 
     /**
      * Proses autentikasi user dengan throttle rate limiting.
+     * Menggunakan multi-guard per role agar tiap role memiliki sesi terpisah.
      */
     public function login(Request $request): RedirectResponse
     {
@@ -50,20 +49,26 @@ class AuthController extends Controller
             ]);
         }
 
-        $remember = $request->boolean('remember');
+        $user = User::where('username', $credentials['username'])->first();
 
-        if (Auth::attempt($credentials, $remember)) {
-            $user = Auth::user();
-
+        if ($user && Hash::check($credentials['password'], $user->password)) {
             if (! $user->is_active) {
-                Auth::logout();
-                $request->session()->invalidate();
-                $request->session()->regenerateToken();
-
                 return back()->withInput($request->only('username'))->withErrors([
                     'username' => 'Akun Anda telah dinonaktifkan. Silakan hubungi Kepala Bagian.',
                 ]);
             }
+
+            $roleValue = $user->role instanceof Role ? $user->role->value : (string) $user->role;
+            $guardName = match ($roleValue) {
+                'kabag' => 'kabag',
+                'staff' => 'staff',
+                'intern' => 'intern',
+                default => 'web',
+            };
+
+            Auth::guard($guardName)->login($user);
+            Auth::shouldUse($guardName);
+            Auth::guard('web')->setUser($user);
 
             $request->session()->regenerate();
             RateLimiter::clear($throttleKey);
@@ -86,13 +91,29 @@ class AuthController extends Controller
     }
 
     /**
-     * Proses logout user.
+     * Proses logout user untuk guard role yang relevan.
      */
     public function logout(Request $request): RedirectResponse
     {
-        Auth::logout();
+        $roleInput = $request->input('role');
+        $guardToLogout = in_array($roleInput, ['kabag', 'staff', 'intern'], true)
+            ? $roleInput
+            : Auth::getDefaultDriver();
 
-        $request->session()->invalidate();
+        if (in_array($guardToLogout, ['kabag', 'staff', 'intern', 'web'], true)) {
+            Auth::guard($guardToLogout)->logout();
+        } else {
+            Auth::logout();
+        }
+
+        $hasOtherSession = Auth::guard('kabag')->check()
+            || Auth::guard('staff')->check()
+            || Auth::guard('intern')->check();
+
+        if (! $hasOtherSession) {
+            $request->session()->invalidate();
+        }
+
         $request->session()->regenerateToken();
 
         return redirect()->route('login');

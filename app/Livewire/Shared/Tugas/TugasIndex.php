@@ -69,6 +69,9 @@ class TugasIndex extends Component
     public string $kumpul_teks = '';
     public ?int $kumpul_tujuan_user_id = null;
 
+    // Modal Konfirmasi Terima Tugas (Kabag)
+    public bool $show_terima_confirm_modal = false;
+
     // Modal Popup Hasil Pengumpulan (Kabag pada Tab Selesai)
     public bool $show_hasil_modal = false;
     public ?Tugas $hasil_tugas = null;
@@ -365,11 +368,27 @@ class TugasIndex extends Component
         $this->dispatch('toast', message: 'Catatan revisi telah dikirimkan.', type: 'success');
     }
 
+    public function openTerimaTugasConfirm(): void
+    {
+        if (! $this->hasil_tugas) {
+            return;
+        }
+
+        $this->show_terima_confirm_modal = true;
+    }
+
+    public function closeTerimaTugasConfirm(): void
+    {
+        $this->show_terima_confirm_modal = false;
+    }
+
     public function terimaTugasAction(TugasAlurServiceInterface $alurService): void
     {
         if (! $this->hasil_tugas) {
             return;
         }
+
+        $this->show_terima_confirm_modal = false;
 
         Gate::authorize('terima', $this->hasil_tugas);
 

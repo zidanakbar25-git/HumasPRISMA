@@ -501,7 +501,15 @@ class JadwalKegiatanIndex extends Component
      */
     public function confirmDelete(int $id): void
     {
-        $kegiatan = Kegiatan::findOrFail($id);
+        $kegiatan = Kegiatan::find($id);
+
+        if (! $kegiatan) {
+            $this->closeDetailModal();
+            $this->closeDeleteModal();
+            $this->dispatch('toast', message: 'Kegiatan tidak ditemukan atau telah dihapus.', type: 'error');
+            return;
+        }
+
         Gate::authorize('delete', $kegiatan);
 
         $this->delete_kegiatan_id = $id;
@@ -517,14 +525,25 @@ class JadwalKegiatanIndex extends Component
         $this->delete_kegiatan_judul = '';
     }
 
-    public function deleteKegiatan(KegiatanServiceInterface $service): void
+    public function deleteKegiatan(KegiatanServiceInterface $service, ?int $id = null): void
     {
-        $kegiatan = Kegiatan::findOrFail($this->delete_kegiatan_id);
-        Gate::authorize('delete', $kegiatan);
+        $targetId = $id ?? $this->delete_kegiatan_id ?? $this->detail_kegiatan_id;
 
-        $service->deleteKegiatan($kegiatan);
+        if (! $targetId) {
+            $this->closeDeleteModal();
+            $this->closeDetailModal();
+            return;
+        }
+
+        $kegiatan = Kegiatan::find($targetId);
+
+        if ($kegiatan) {
+            Gate::authorize('delete', $kegiatan);
+            $service->deleteKegiatan($kegiatan);
+        }
 
         $this->closeDeleteModal();
+        $this->closeDetailModal();
         $this->dispatch('toast', message: 'Kegiatan berhasil dihapus.', type: 'success');
     }
 

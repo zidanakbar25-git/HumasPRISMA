@@ -86,6 +86,7 @@
 
         <form method="POST" action="{{ route('logout') }}">
             @csrf
+            <input type="hidden" name="role" value="{{ $role?->value ?? '' }}">
             <button type="submit" class="btn-logout">
                 <x-icon name="logout" :size="16" />
                 <span>Keluar</span>

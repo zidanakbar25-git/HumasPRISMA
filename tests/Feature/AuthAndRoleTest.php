@@ -186,6 +186,38 @@ class AuthAndRoleTest extends TestCase
         $response->assertDontSee('Backup Database');
     }
 
+    public function test_home_page_redirects_to_login(): void
+    {
+        $response = $this->get('/');
+        $response->assertRedirect(route('login'));
+    }
+
+    public function test_kabag_and_staff_can_have_separate_sessions_concurrently(): void
+    {
+        $kabag = User::factory()->create([
+            'username' => 'kabag_concurrent',
+            'role' => Role::Kabag,
+            'is_active' => true,
+        ]);
+
+        $staff = User::factory()->create([
+            'username' => 'staff_concurrent',
+            'role' => Role::Staff,
+            'is_active' => true,
+        ]);
+
+        // Login kabag ke guard kabag dan staff ke guard staff
+        \Illuminate\Support\Facades\Auth::guard('kabag')->login($kabag);
+        \Illuminate\Support\Facades\Auth::guard('staff')->login($staff);
+
+        // Keduanya bisa mengakses rute masing-masing secara bersamaan
+        $responseKabag = $this->get('/kabag/jadwal-kegiatan');
+        $responseKabag->assertStatus(200);
+
+        $responseStaff = $this->get('/staff/jadwal-kegiatan');
+        $responseStaff->assertStatus(200);
+    }
+
     public function test_user_can_logout(): void
     {
         $user = User::factory()->create([

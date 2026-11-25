@@ -2461,7 +2461,11 @@
 
             <div class="modal-footer detail-footer">
                 @if($isKabag)
-                <button type="button" class="detail-delete" wire:click="confirmDelete({{ $detail_kegiatan->id }})">
+                <button type="button" 
+                        class="detail-delete" 
+                        wire:click="deleteKegiatan({{ $detail_kegiatan->id }})" 
+                        wire:confirm="Apakah Anda yakin ingin menghapus kegiatan ini?" 
+                        wire:loading.attr="disabled">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <polyline points="3 6 5 6 21 6" />
                         <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
@@ -2732,7 +2736,7 @@
                 <button type="button" class="btn btn-secondary" wire:click="closeDeleteModal">
                     Batal
                 </button>
-                <button type="button" class="btn btn-danger" wire:click="deleteKegiatan">
+                <button type="button" class="btn btn-danger" wire:click="deleteKegiatan" wire:loading.attr="disabled">
                     Ya, Hapus Kegiatan
                 </button>
             </div>
