@@ -925,7 +925,14 @@ class TugasIndex extends Component
      */
     public function confirmDelete(int $id): void
     {
-        $tugas = Tugas::findOrFail($id);
+        $tugas = Tugas::find($id);
+
+        if (! $tugas) {
+            $this->closeDetailModal();
+            $this->dispatch('toast', message: 'Tugas tidak ditemukan.', type: 'error');
+            return;
+        }
+
         Gate::authorize('delete', $tugas);
 
         $this->delete_tugas_id = $id;
@@ -943,11 +950,25 @@ class TugasIndex extends Component
 
     public function deleteTugas(TugasServiceInterface $service): void
     {
-        $tugas = Tugas::findOrFail($this->delete_tugas_id);
+        if (! $this->delete_tugas_id) {
+            $this->closeDeleteModal();
+            return;
+        }
+
+        $tugas = Tugas::find($this->delete_tugas_id);
+
+        if (! $tugas) {
+            $this->closeDeleteModal();
+            $this->dispatch('toast', message: 'Tugas sudah dihapus atau tidak ditemukan.', type: 'error');
+            return;
+        }
+
         Gate::authorize('delete', $tugas);
 
         $service->deleteTugas($tugas);
 
+        $this->detail_tugas_id = null;
+        $this->detail_tugas = null;
         $this->closeDeleteModal();
         $this->dispatch('toast', message: 'Tugas berhasil dihapus.', type: 'success');
     }

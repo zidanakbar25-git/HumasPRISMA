@@ -504,11 +504,13 @@
 
                 {{-- Modal Footer --}}
                 <div class="modal-footer">
-                    @if($isKabag && $detail_tugas->tahap->value !== 'diterima')
-                        <button type="button" class="btn btn-secondary" wire:click="openEditModal({{ $detail_tugas->id }})">
-                            <x-icon name="edit" :size="16" />
-                            <span>Edit Tugas</span>
-                        </button>
+                    @if($isKabag)
+                        @if($detail_tugas->tahap->value !== 'diterima')
+                            <button type="button" class="btn btn-secondary" wire:click="openEditModal({{ $detail_tugas->id }})">
+                                <x-icon name="edit" :size="16" />
+                                <span>Edit Tugas</span>
+                            </button>
+                        @endif
                         <button type="button" class="btn btn-danger" wire:click="confirmDelete({{ $detail_tugas->id }})">
                             <x-icon name="trash" :size="16" />
                             <span>Hapus</span>
